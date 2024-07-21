@@ -11,7 +11,7 @@
             </div>
 
 
-            @include('theme_1.userprofile.message')
+            @include('layouts.message')
 
 
             <form action="{{ route('update_profile.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">

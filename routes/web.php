@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/edit-profile/{uid}', [RegisterController::class, 'edit_profile'])->name('edit_profile.aiuser');
+    Route::put('/dashboard/profile/{user}', [RegisterController::class, 'update_profile'])->name('update_profile.update');
     
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

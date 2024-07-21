@@ -25,7 +25,7 @@
                 <span><?=ucfirst(Auth::user()->name)?></span>
             </a>
             <div class="dropdown-menu">
-                <!-- <a class="dropdown-item" href="{{ url('edit-profile/'.encrypt(Auth::user()->id)) }}">Account Setting</a> -->
+                <a class="dropdown-item" href="{{ url('edit-profile/'.encrypt(Auth::user()->id)) }}">Account Setting</a>
                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
             </div>
         </li>
@@ -33,7 +33,7 @@
     <div class="dropdown mobile-user-menu float-right">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <!-- <a class="dropdown-item" href="{{ url('edit-profile/'.encrypt(Auth::user()->id)) }}">Account Setting</a> -->
+            <a class="dropdown-item" href="{{ url('edit-profile/'.encrypt(Auth::user()->id)) }}">Account Setting</a>
             <a class="dropdown-item" href="{{ url('public/profile/login') }}">Logout</a>
         </div>
     </div>
