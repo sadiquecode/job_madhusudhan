@@ -1,0 +1,39 @@
+.icon-list {
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: .25rem;
+    @include media-breakpoint-down(md) {
+      font-size: 1.3rem;
+    }
+    @include media-breakpoint-down(sm) {
+      font-size: 1.2rem;
+    }
+    &::before {
+      display: block;
+      flex-shrink: 0;
+      width: .7em;
+      height: 1.6em;
+      margin-right: .8rem;
+      content: "";
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230A428E' viewBox='0 0 20 14'%3E%3Cpath d='M18.9337 0.599951C18.4003 0.0666178 17.6003 0.0666178 17.067 0.599951L7.06699 10.6L2.93366 6.46662C2.40032 5.93329 1.60033 5.93329 1.06699 6.46662C0.533659 6.99995 0.533659 7.79995 1.06699 8.33329L6.13366 13.4C6.40033 13.6666 6.66699 13.8 7.06699 13.8C7.46699 13.8 7.73366 13.6666 8.00033 13.4L18.9337 2.46662C19.467 1.93329 19.467 1.13328 18.9337 0.599951Z'/%3E%3C/svg%3E") no-repeat center center / 100% auto;
+    }
+  }
+
+  &.icon-list-square li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230A428E' viewBox='0 0 16 17'%3E%3Cpath d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/%3E%3Cpath d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z'/%3E%3C/svg%3E");
+    width: 1em;
+  }
+
+  &.icon-list-warning li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F8A722' viewBox='0 0 20 14'%3E%3Cpath d='M18.9337 0.599951C18.4003 0.0666178 17.6003 0.0666178 17.067 0.599951L7.06699 10.6L2.93366 6.46662C2.40032 5.93329 1.60033 5.93329 1.06699 6.46662C0.533659 6.99995 0.533659 7.79995 1.06699 8.33329L6.13366 13.4C6.40033 13.6666 6.66699 13.8 7.06699 13.8C7.46699 13.8 7.73366 13.6666 8.00033 13.4L18.9337 2.46662C19.467 1.93329 19.467 1.13328 18.9337 0.599951Z'/%3E%3C/svg%3E");
+  }
+
+  &.icon-list-square-warning li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F8A722' viewBox='0 0 16 17'%3E%3Cpath d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/%3E%3Cpath d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z'/%3E%3C/svg%3E");
+    width: 1em;
+  }
+}

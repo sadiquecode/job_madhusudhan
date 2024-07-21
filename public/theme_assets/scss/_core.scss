@@ -1,0 +1,38 @@
+.form-check-input,
+.form-check-label {
+  cursor: pointer;
+}
+
+.form-check-input[type=radio] {
+  border-radius: 0.25em !important;
+}
+
+.form-check-input {
+  width: 24px;
+  height: 24px;
+  margin-top: 0;
+}
+
+.form-check-label {
+  font-weight: $font-weight-medium;
+  -webkit-margin-start: 12px;
+  margin-inline-start: 12px;
+  font-size: 14px;
+}
+
+.embedded-video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

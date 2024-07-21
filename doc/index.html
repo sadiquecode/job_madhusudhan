@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeachMe Project Installation Guide</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-top: 30px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .img-responsive {
+            max-width: 800px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TeachMe Project Installation Guide</h1>
+
+        <h2>Install Project and Setup Database</h2>
+        <ol>
+            <li>Unzip the <code>teachme.zip</code> file in the <code>public_html</code> folder.</li>
+            <li>Set up the database by creating a new database and user with appropriate permissions.</li>
+            <li>Import the database from <code>db/teachme_latest.sql</code>.</li>
+            <li>Update the database details in the <code>.env</code> file:</li>
+            <pre><code>DB_DATABASE=demo
+DB_USERNAME=demo
+DB_PASSWORD=demo
+</code></pre>
+            <li>Open the terminal and run <code>composer update</code>.</li>
+        </ol>
+
+        <h2>Setup Email</h2>
+        <ol start="6">
+            <li>Go to <a href="https://resend.com/overview">https://resend.com/overview</a> and configure your domain.</li>
+            <li>Add configuration details in the <code>.env</code> file:</li>
+            <pre><code>RESEND_API_KEY=re_ZvtBzSYs_CSn2aq67sKCD27ALzeDvdhm6
+
+MAIL_MAILER=resend
+MAIL_HOST=smtp.resend.com
+MAIL_PORT=465
+MAIL_USERNAME=resend
+MAIL_PASSWORD=re_ZvtBzSYs_CSn2aq67sKCD27ALzeDvdhm6
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=&lt;noreply@teachme.com&gt;
+MAIL_FROM_NAME=Resend
+admin_mail=admin@gmail.com
+</code></pre>
+        </ol>
+
+        <h2>Setup Stripe</h2>
+        <ol start="8">
+            <li>Go to <a href="https://stripe.com">https://stripe.com</a> to generate keys, webhook, and two catalogs.</li>
+            <li>Paste keys and webhook details in the <code>.env</code> file:</li>
+            <pre><code>STRIPE_KEY=
+STRIPE_SECRET=
+STRIPE_CURRENCY=AED
+STRIPE_WEBHOOK_SECRET=
+</code></pre>
+            <li>Create two catalogs in Stripe: <strong>Tutor Premium</strong> and <strong>Student Premium</strong> with their respective prices and time durations.</li>
+        <li>Copy the <code>price_id</code> from the package details.</li>
+        <li><img src="stripe_price.png" class="img-fluid img-responsive" alt="Stripe Price"></li>
+        <li>Paste the <code>price_id</code> in the dashboard, <code>{url}dashboard/package</code> for both student and tutor packages.</li>
+        </ol>
+
+        <h2>Logging in as Admin</h2>
+        <p>Open the website in the browser and login as admin:</p>
+        <pre><code>URL: {url}login
+Email: demoadmin@gmail.com
+Password: demoadmin
+</code></pre>
+        <p>Note: These credentials are changeable. You can update them anytime from the profile settings.</p>
+
+        <h2>Congratulations!</h2>
+        <p>You have successfully installed TeachMe.</p>
+    </div>
+</body>
+</html>

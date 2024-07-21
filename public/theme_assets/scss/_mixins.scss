@@ -1,0 +1,6 @@
+@mixin bg-image {
+  position: absolute;
+  content: "";
+  background-repeat: no-repeat;
+  z-index: -1;
+}

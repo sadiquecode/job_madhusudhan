@@ -1,0 +1,46 @@
+#tutor-details-section {
+  .contact-buttons {  
+    a {
+      text-decoration: none;
+    }
+    .icon-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: $primary;
+      background: $body-tertiary-bg;
+      transition: color 0.2s, background-color 0.2s;
+
+      &:hover {
+        background: $primary;
+        color: $white;
+      }
+    }
+  }
+
+  #unlock-btn {
+    display: flex;
+    &::before {
+      display: block;
+      flex-shrink: 0;
+      width: 1.6em;
+      height: 1.6em;
+      margin-right: 0.8rem;
+      content: "";
+      background: no-repeat center center / 100%;
+      // Lock Icon
+      background-image: url("data:image/svg+xml,%3Csvg width='22' height='23' viewBox='0 0 22 23' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.5 9.66659V7.83325C5.5 4.79909 6.41667 2.33325 11 2.33325C15.5833 2.33325 16.5 4.79909 16.5 7.83325V9.66659' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10.9997 17.4583C12.2653 17.4583 13.2913 16.4323 13.2913 15.1667C13.2913 13.901 12.2653 12.875 10.9997 12.875C9.73402 12.875 8.70801 13.901 8.70801 15.1667C8.70801 16.4323 9.73402 17.4583 10.9997 17.4583Z' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15.583 20.6667H6.41634C2.74967 20.6667 1.83301 19.7501 1.83301 16.0834V14.2501C1.83301 10.5834 2.74967 9.66675 6.41634 9.66675H15.583C19.2497 9.66675 20.1663 10.5834 20.1663 14.2501V16.0834C20.1663 19.7501 19.2497 20.6667 15.583 20.6667Z' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    }
+    &:hover {
+      background: $warning !important;
+      border-color: $warning !important;
+      &::before {
+        // Unlock Icon
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.833 25.667H8.16634C3.49967 25.667 2.33301 24.5003 2.33301 19.8337V17.5003C2.33301 12.8337 3.49967 11.667 8.16634 11.667H19.833C24.4997 11.667 25.6663 12.8337 25.6663 17.5003V19.8337C25.6663 24.5003 24.4997 25.667 19.833 25.667Z' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7 11.6663V9.33301C7 5.47134 8.16667 2.33301 14 2.33301C19.25 2.33301 21 4.66634 21 8.16634' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.9997 21.5833C15.6105 21.5833 16.9163 20.2775 16.9163 18.6667C16.9163 17.0558 15.6105 15.75 13.9997 15.75C12.3888 15.75 11.083 17.0558 11.083 18.6667C11.083 20.2775 12.3888 21.5833 13.9997 21.5833Z' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      }
+    }
+  }
+}

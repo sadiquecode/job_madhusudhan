@@ -1,0 +1,24 @@
+footer {
+  .nav-link:hover {
+    color: $warning !important;
+  }
+}
+
+.footer-social-icons {
+  a {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    text-decoration: none;
+    font-size: 36px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+}
+
+.footer-logo {
+  height: 50px;
+  @include media-breakpoint-down(md) {
+    height: 30px;
+  }
+}

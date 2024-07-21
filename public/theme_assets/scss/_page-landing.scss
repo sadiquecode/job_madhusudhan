@@ -1,0 +1,291 @@
+#hero-section {
+  position: relative;
+  @include media-breakpoint-down(lg) {
+    padding-bottom: 80px;
+  }
+  &::before {
+    @include bg-image;
+    background-image: url("../images/page-landing/section-hero/hero-text-bg.svg");
+    width: 100px;
+    height: 450px;
+    bottom: 0;
+    left: 0;
+    @include media-breakpoint-down(sm) {
+      opacity: 0.1;
+    }
+  }
+}
+
+#hero-student-container {
+  position: relative;
+  overflow: visible;
+  & img {
+    width: min(600px, 100%);
+  }
+  &::before {
+    @include bg-image;
+    background-image: url("../images/page-landing/section-hero/hero-student-bg.svg");
+    background-size: contain;
+    top: 0;
+    width: 150%;
+    height: 100%;
+    background-position-x: center;
+  }
+
+  @include media-breakpoint-down(lg) {
+    &::before {
+      content: none;
+    }
+    position: absolute;
+    top: 0;
+    left: 35svw;
+    opacity: 0.2;
+    z-index: -1;
+    height: 100%;
+    & img {
+      width: auto;
+    }
+  }
+}
+
+.hover-logos-container {
+  .figure {
+    position: relative;
+    top: 0;
+    transition: top 0.3s;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .figure-img-container {
+    width: 110px;
+    height: 110px;
+    padding: 3px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+
+  .figure-img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+  }
+
+  .figure-caption {
+    margin-top: 0.5rem;
+    transition: color 0.3s;
+    letter-spacing: 2px;
+  }
+
+  .figure:hover {
+    top: -0.5px;
+
+    .figure-img-container {
+      border-color: $warning;
+      box-shadow: $box-shadow;
+    }
+
+    .figure-caption {
+      color: $warning !important;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .figure-img-container {
+      width: 70px;
+      height: 70px;
+    }
+
+    .figure-caption {
+      margin-top: 0;
+      letter-spacing: 0;
+      font-size: 12px;
+    }
+  }
+}
+
+#languages-section {
+  background-image: url("../images/page-landing/section-languages/bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#find-tutors-section {
+  background-image: url("../images/page-landing/section-find-tutors/bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 3rem;
+  }
+
+  img {
+    box-shadow: -11px 14px 13px 0px rgba(0, 0, 0, 0.09);
+  }
+}
+
+#verified-tutors-section {
+  background-image: url("../images/page-landing/section-verified-tutors/bg.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+  .card-bottom-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-inline: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    transition: background-color 0.2s;
+  }
+
+  .card {
+    width: min(300px, 100%);
+    height: min(417px, 100%);
+    aspect-ratio: 300 / 417;
+    margin-inline: auto;
+
+    &:hover {
+      box-shadow: 0px 24px 48px -8px rgba(0, 0, 0, 0.12);
+      .card-bottom-container {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+#testimonials-section {
+  .flickity-page-dots {
+    top: 0;
+    bottom: unset;
+    .dot {
+      transform: scale(0.75);
+      transition: transform 0.2s;
+      &.is-selected {
+        transform: scale(1);
+      }
+    }
+  }
+
+  .flickity-button {
+    background: transparent;
+    top: -25px;
+    &.previous {
+      left: min(15vw, 25%);
+    }
+    &.next {
+      right: min(15vw, 25%);
+    }
+
+    @include media-breakpoint-down(lg) {
+      &.previous,
+      &.next {
+        top: 10px;
+      }
+    }
+  }
+
+  .carousel-cell {
+    width: min(431px, 100%);
+
+    .card {
+      transform: scale(0.8);
+      transition: transform 0.2s;
+      &::before {
+        @include bg-image;
+        height: 100%;
+        top: 20px;
+        left: 0;
+        right: 0;
+        background-position: center;
+        background-size: contain;
+      }
+    }
+
+    @include media-breakpoint-down(lg) {
+      .card::before {
+        background-size: cover;
+      }
+    }
+
+    &:nth-child(3n + 1) .card::before {
+      background-image: url("../images/page-landing/section-testimonials/bg-left.svg");
+    }
+
+    &:nth-child(3n + 2) .card::before {
+      background-image: url("../images/page-landing/section-testimonials/bg-mid.svg");
+    }
+
+    &:nth-child(3n + 3) .card::before {
+      background-image: url("../images/page-landing/section-testimonials/bg-right.svg");
+    }
+
+    &.is-selected .card {
+      transform: scale(1);
+    }
+  }
+}
+
+#pricing-section {
+  .card {
+    width: min(450px, 100%);
+    transition: box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0px 24px 48px -8px rgba(0, 0, 0, 0.12);
+    }
+    .btn {
+      border-color: $gray-300;
+    }
+  }
+
+  .tutor-card {
+    background-color: rgba(10, 66, 142, 0.05);
+  }
+
+  .student-card {
+    background-color: rgba(250, 167, 26, 0.12);
+
+    .btn {
+      color: $secondary;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .pricing-card-title {
+    border-block: 1px solid $gray-200;
+  }
+}
+
+#start-learning-section {
+  $border-radius: 256px;
+
+  .img-container img {
+    width: min(482px, 100%);
+    aspect-ratio: 1;
+    border-top-left-radius: $border-radius;
+  }
+
+  .text-container {
+    background: #ffebc5;
+    border-bottom-right-radius: $border-radius;
+  }
+
+  @include media-breakpoint-down(lg) {
+    .img-container img {
+      border-top-left-radius: calc($border-radius / 2);
+    }
+
+    .text-container {
+      border-bottom-right-radius: calc($border-radius / 2);
+    }
+  }
+}

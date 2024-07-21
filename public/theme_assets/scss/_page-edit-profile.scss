@@ -1,0 +1,57 @@
+#profile-section {
+  .nav {
+    --#{$prefix}nav-link-color: #{$secondary};
+    --#{$prefix}nav-link-hover-color: #{$secondary};
+    --#{$prefix}nav-link-font-weight: #{$font-weight-normal};
+  }
+
+  .nav-pills {
+    --#{$prefix}nav-pills-border-radius: 12px;
+    --#{$prefix}nav-pills-link-active-bg: #{$faded-secondary};
+    --#{$prefix}nav-pills-link-active-color: #{$secondary};
+  }
+
+  #profile-tabs {
+    .nav-link {
+      width: 200px;
+      max-width: 100%;
+      text-align: start;
+      display: flex;
+      align-items: center;
+      transition: width 0.2s;
+
+      @include media-breakpoint-down(md) {
+        width: 60px;
+        overflow: hidden;
+      }
+
+      img {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+
+  .card {
+    --#{$prefix}card-border-color: rgba(39, 45, 78, 10%);
+    --#{$prefix}card-border-radius: 16px;
+  }
+
+  #edit-tab-pane {
+    .title {
+      color: $gray-500;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .gutter {
+    --#{$prefix}gutter-y: 2.5rem;
+    --#{$prefix}gutter-x: 2.5rem;
+
+    @include media-breakpoint-down(sm) {
+      --#{$prefix}gutter-y: 1.5rem;
+      --#{$prefix}gutter-x: 1.5rem;
+    }
+  }
+}

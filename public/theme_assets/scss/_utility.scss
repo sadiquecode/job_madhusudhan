@@ -1,0 +1,200 @@
+.gap-4-5 {
+  gap: 4.5rem !important;
+}
+
+$gap-sizes: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20;
+
+@each $size in $gap-sizes {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @if $breakpoint == xs {
+      .gap-#{$size} {
+        gap: #{$size}rem !important;
+      }
+      .mt-#{$size} {
+        margin-top: #{$size}rem !important;
+      }
+      .mb-#{$size} {
+        margin-bottom: #{$size}rem !important;
+      }
+      .ms-#{$size} {
+        -webkit-margin-start: #{$size}rem !important;
+        margin-inline-start: #{$size}rem !important;
+      }
+      .me-#{$size} {
+        -webkit-margin-end: #{$size}rem !important;
+        margin-inline-end: #{$size}rem !important;
+      }
+      .my-#{$size} {
+        margin-top: #{$size}rem !important;
+        margin-bottom: #{$size}rem !important;
+      }
+      .mx-#{$size} {
+        -webkit-margin-start: #{$size}rem !important;
+        margin-inline-start: #{$size}rem !important;
+        -webkit-margin-end: #{$size}rem !important;
+        margin-inline-end: #{$size}rem !important;
+      }
+      .m-#{$size} {
+        margin: #{$size}rem !important;
+      }
+      .pt-#{$size} {
+        padding-top: #{$size}rem !important;
+      }
+      .pb-#{$size} {
+        padding-bottom: #{$size}rem !important;
+      }
+      .ps-#{$size} {
+        -webkit-padding-start: #{$size}rem !important;
+        padding-inline-start: #{$size}rem !important;
+      }
+      .pe-#{$size} {
+        -webkit-padding-end: #{$size}rem !important;
+        padding-inline-end: #{$size}rem !important;
+      }
+      .py-#{$size} {
+        padding-top: #{$size}rem !important;
+        padding-bottom: #{$size}rem !important;
+      }
+      .px-#{$size} {
+        -webkit-padding-start: #{$size}rem !important;
+        padding-inline-start: #{$size}rem !important;
+        -webkit-padding-end: #{$size}rem !important;
+        padding-inline-end: #{$size}rem !important;
+      }
+      .p-#{$size} {
+        padding: #{$size}rem !important;
+      }
+      .mt-n#{$size} {
+        margin-top: -#{$size}rem !important;
+      }
+      .mb-n#{$size} {
+        margin-bottom: -#{$size}rem !important;
+      }
+      .ms-n#{$size} {
+        -webkit-margin-start: -#{$size}rem !important;
+        margin-inline-start: -#{$size}rem !important;
+      }
+      .me-n#{$size} {
+        -webkit-margin-end: -#{$size}rem !important;
+        margin-inline-end: -#{$size}rem !important;
+      }
+    } @else {
+      @include media-breakpoint-up($breakpoint) {
+        .gap-#{$breakpoint}-#{$size} {
+          gap: #{$size}rem !important;
+        }
+        .mt-#{$breakpoint}-#{$size} {
+          margin-top: #{$size}rem !important;
+        }
+        .mb-#{$breakpoint}-#{$size} {
+          margin-bottom: #{$size}rem !important;
+        }
+        .ms-#{$size} {
+          -webkit-margin-start: #{$size}rem !important;
+          margin-inline-start: #{$size}rem !important;
+        }
+        .me-#{$size} {
+          -webkit-margin-end: #{$size}rem !important;
+          margin-inline-end: #{$size}rem !important;
+        }
+        .my-#{$size} {
+          margin-top: #{$size}rem !important;
+          margin-bottom: #{$size}rem !important;
+        }
+        .mx-#{$size} {
+          -webkit-margin-start: #{$size}rem !important;
+          margin-inline-start: #{$size}rem !important;
+          -webkit-margin-end: #{$size}rem !important;
+          margin-inline-end: #{$size}rem !important;
+        }
+        .m-#{$breakpoint}-#{$size} {
+          margin: #{$size}rem !important;
+        }
+        .pt-#{$breakpoint}-#{$size} {
+          padding-top: #{$size}rem !important;
+        }
+        .pb-#{$breakpoint}-#{$size} {
+          padding-bottom: #{$size}rem !important;
+        }
+        .ps-#{$size} {
+          -webkit-padding-start: #{$size}rem !important;
+          padding-inline-start: #{$size}rem !important;
+        }
+        .pe-#{$size} {
+          -webkit-padding-end: #{$size}rem !important;
+          padding-inline-end: #{$size}rem !important;
+        }
+        .py-#{$size} {
+          padding-top: #{$size}rem !important;
+          padding-bottom: #{$size}rem !important;
+        }
+        .px-#{$size} {
+          -webkit-padding-start: #{$size}rem !important;
+          padding-inline-start: #{$size}rem !important;
+          -webkit-padding-end: #{$size}rem !important;
+          padding-inline-end: #{$size}rem !important;
+        }
+        .p-#{$breakpoint}-#{$size} {
+          padding: #{$size}rem !important;
+        }
+        .mt-#{$breakpoint}-n#{$size} {
+          margin-top: -#{$size}rem !important;
+        }
+        .mb-#{$breakpoint}-n#{$size} {
+          margin-bottom: -#{$size}rem !important;
+        }
+        .ms-#{$breakpoint}-n#{$size} {
+          -webkit-margin-start: -#{$size}rem !important;
+          margin-inline-start: -#{$size}rem !important;
+        }
+        .me-#{$breakpoint}-n#{$size} {
+          -webkit-margin-end: -#{$size}rem !important;
+          margin-inline-end: -#{$size}rem !important;
+        }
+      }
+    }
+  }
+}
+
+@each $display, $font-size in $display-font-sizes {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @if $breakpoint != xs {
+      @include media-breakpoint-up($breakpoint) {
+        .display-#{$breakpoint}-#{$display} {
+          @include font-size($font-size);
+          font-family: $display-font-family;
+          font-style: $display-font-style;
+          font-weight: $display-font-weight;
+          line-height: $display-line-height;
+        }
+      }
+    }
+  }
+}
+
+.box-shadow-xs {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+}
+
+.box-shadow-sm {
+  box-shadow: 0 16px 32px -4px rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.box-shadow-md {
+  box-shadow: 0 24px 48px -8px rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.box-shadow-lg {
+  box-shadow: 0 40px 80px -16px rgba(0, 0, 0, 0.16), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.box-shadow-xl {
+  box-shadow: 0 56px 112px -20px rgba(0, 0, 0, 0.18), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.move-lg-up {
+  @include media-breakpoint-up(lg) {
+    position: relative;
+    top: -120px;
+  }
+}

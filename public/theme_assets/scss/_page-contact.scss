@@ -1,0 +1,19 @@
+#contact-us-section {
+  .contact-info-container {
+    position: relative;
+    & > * {
+      z-index: 1;
+    }
+
+    &::after {
+      @include bg-image;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background-image: url("../images/page-contact-us/br-circles.svg");
+      background-position: bottom right;
+    }
+  }
+}
