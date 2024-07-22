@@ -20,9 +20,22 @@
                     <input type="name" class="form-control shadow-none" id="applicantinput"
                         placeholder="Applicant Name">
                 </div>
-                <div class="mb-3 d-grid">
-                    <label for="fileInput" class="form-label fw-bold">Upload Passport Size Photo</label>
-                    <input type="file" class="shadow-none border-0" id="fileInput" placeholder="Browse">
+                <div class="mb-3">
+                    <label for="fileInput1" class="form-label fw-bold">Upload Passport Size Photo</label>
+                    <div class="d-flex align-items-center">
+                        <div class="custom-file-input">
+                            <label for="fileInput1" class="shadow-sm">
+                                <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" />
+                                </svg>Browse
+                            </label>
+                            <input type="file" class="shadow-none border-0" id="fileInput1"
+                                onchange="updateLabel('fileInput1', 'fileName1')">
+                        </div>
+                        <span id="fileName1" class="file-name text-muted">No file uploaded</span>
+                    </div>
                 </div>
                 <div class="container">
                     <div class="row">
@@ -307,9 +320,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3 d-grid">
-                    <label for="fileInput" class="form-label fw-bold">Upload CV</label>
-                    <input type="file" class="shadow-none border-0" id="fileInput" placeholder="Browse">
+                <div class="mb-3">
+                    <label for="fileInput2" class="form-label fw-bold">Upload CV</label>
+                    <div class="d-flex align-items-center">
+                        <div class="custom-file-input">
+                            <label for="fileInput2" class="shadow-sm">
+                                <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" />
+                                </svg>Browse
+                            </label>
+                            <input type="file" class="shadow-none border-0" id="fileInput2"
+                                onchange="updateLabel('fileInput2', 'fileName2')">
+                        </div>
+                        <span id="fileName2" class="file-name text-muted">No file uploaded</span>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="democlassInput" class="form-label fw-bold">Demo Class Video Link (Optional)</label>
@@ -350,13 +376,16 @@
 
                 </div>
                 <div class="submitbtn py-5 text-center">
-                    <button type="button" class="btn btn-danger fw-bold">Submit</button>
+                    <a href="thanku.html" class="btn btn-danger fw-bold px-3 rounded-0">Submit</a>
                 </div>
+                <a class="btn btn-outline-warning fw-bold" href="appliedjob.html">Applied JOB</a>
+                <a class="btn btn-outline-warning fw-bold" href="epplieddata.html">Applied DATA</a>
             </form>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
+    <script src="assets/js/main.js"></script>
     <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -39,7 +39,8 @@ li,
 a,
 p,
 label,
-small {
+small,
+button {
     font-family: var(--primary-font);
 }
 
@@ -51,6 +52,7 @@ small {
     max-width: 999px !important;
 }
 
+/* ==================== Index Start ==================== */
 .jobform {
     background-color: white;
     border-radius   : 12px;
@@ -59,3 +61,98 @@ small {
         0 1px 5px 0 rgba(0, 0, 0, .06) !important;
     padding: 0 15px;
 }
+
+.form-control:focus {
+    color           : #212529;
+    background-color: #fff;
+    border-color    : transparent !important;
+    outline         : 0;
+    filter          : drop-shadow(0px 0px 2.5px rgba(0, 0, 0, 0.14)) !important;
+}
+
+.custom-file-input {
+    position: relative;
+    display : inline-block;
+}
+
+.custom-file-input input[type="file"] {
+    position: absolute;
+    left    : 0;
+    top     : 0;
+    right   : 0;
+    bottom  : 0;
+    opacity : 0;
+    width   : 100%;
+    height  : 100%;
+    cursor  : pointer !important;
+}
+
+.custom-file-input label {
+    padding      : 3px 15px;
+    background   : rgb(189, 187, 222);
+    background   : linear-gradient(180deg, rgba(189, 187, 222, 1) 0%, rgba(222, 222, 228, 1) 35%, rgba(154, 154, 154, 1) 100%);
+    color        : #000;
+    border-radius: 5px;
+    border       : 1px solid gray;
+    text-align   : center;
+    cursor       : pointer;
+    transition   : background 0.3s ease;
+    display      : inline-block;
+}
+
+.custom-file-input label:hover {
+    background: rgb(189, 187, 222);
+    background: linear-gradient(-180deg, rgba(189, 187, 222, 1) 10%, rgba(222, 222, 228, 1) 25%, rgba(154, 154, 154, 1) 80%) !important;
+    cursor    : pointer;
+}
+
+.file-name {
+    margin-left: 15px;
+    font-style : italic;
+}
+
+.form-check-input:checked[type=checkbox] {
+    background-image: url('../image/check-mark.png') !important;
+    background-color: white;
+}
+
+.form-check-input {
+    border: none !important;
+    filter: drop-shadow(0px 0px 2.5px rgba(0, 0, 0, 0.14)) !important;
+}
+
+/* ==================== Index End ==================== */
+
+/* ==================== Applied JOB Start==================== */
+.selectoptions .form-select {
+    background-image: none;
+    width           : 75%;
+    margin          : auto;
+}
+
+.selectoptions span {
+    top : 0;
+    left: 85%;
+}
+
+/* ==================== Applied JOB End ==================== */
+/* ==================== Thank you Start ==================== */
+.thank-you-container {
+    height         : 100vh;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    text-align     : center;
+}
+
+.thank-you-message {
+    max-width: 500px;
+    margin   : auto;
+}
+
+.checkmark {
+    font-size: 50px;
+    color    : green;
+}
+
+/* ==================== Thank you End ==================== */
