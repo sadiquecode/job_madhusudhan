@@ -6,7 +6,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Main\DashboardController;
-use App\Http\Controllers\GlobalDetails\SresultController;
+use App\Http\Controllers\GlobalDetails\SpecialityController;
+use App\Http\Controllers\GlobalDetails\ExpertiseController;
+use App\Http\Controllers\GlobalDetails\TeachMeSubjectController;
+use App\Http\Controllers\GlobalDetails\AcademicController;
+use App\Http\Controllers\GlobalDetails\Non_AcademicController;
 
 
 
@@ -15,7 +19,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('index');
 
 // accounts
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm'])->name('login-admin');
-// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -31,6 +35,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
+Route::get('/thank_you', [DashboardController::class, 'thank_you'])->name('thank_you');
+Route::get('/filter_page', [DashboardController::class, 'filter_page'])->name('filter_page');
+Route::get('/profile_page', [DashboardController::class, 'profile_page'])->name('profile_page');
 Route::middleware(['auth'])->group(function () {
 
 
@@ -43,6 +50,10 @@ Route::middleware(['auth'])->group(function () {
     
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+
+
+
     Route::get('/change/theme/{theme}', [DashboardController::class, 'change_theme'])->name('change_theme');
     Route::get('/change/lang/{lang}', [DashboardController::class, 'change_lang'])->name('change_lang');
 
@@ -59,14 +70,35 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/check_mail', [RegisterController::class, 'check_mail'])->name('check_mail');
 
 
-// result
-    Route::get('dashboard/result', [SresultController::class, 'index'])->name('result.index');
-    Route::post('result', [SresultController::class, 'store'])->name('result.store');
-    Route::put('result/{result}', [SresultController::class, 'update'])->name('result.update');
-    Route::delete('result/{result}', [SresultController::class, 'destroy'])->name('result.destroy');
-    Route::post('/delete-bulk-records', [SresultController::class, 'deleteBulkRecords'])->name('delete.bulk.records');
-    Route::post('dashboard/send_msg', [SresultController::class, 'sendBulkMessages'])->name('send.bulk.messages');
+    // subject
+    Route::get('dashboard/subject', [TeachMeSubjectController::class, 'index'])->name('subject.index');
+    Route::post('subject', [TeachMeSubjectController::class, 'store'])->name('subject.store');
+    Route::put('subject/{subject}', [TeachMeSubjectController::class, 'update'])->name('subject.update');
+    Route::delete('subject/{subject}', [TeachMeSubjectController::class, 'destroy'])->name('subject.destroy');
 
+    // speciality
+    Route::get('dashboard/speciality', [SpecialityController::class, 'index'])->name('speciality.index');
+    Route::post('speciality', [SpecialityController::class, 'store'])->name('speciality.store');
+    Route::put('speciality/{speciality}', [SpecialityController::class, 'update'])->name('speciality.update');
+    Route::delete('speciality/{speciality}', [SpecialityController::class, 'destroy'])->name('speciality.destroy');
+
+    // expertise
+    Route::get('dashboard/expertise', [ExpertiseController::class, 'index'])->name('expertise.index');
+    Route::post('expertise', [ExpertiseController::class, 'store'])->name('expertise.store');
+    Route::put('expertise/{expertise}', [ExpertiseController::class, 'update'])->name('expertise.update');
+    Route::delete('expertise/{expertise}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+
+    // academic
+    Route::get('dashboard/academic', [AcademicController::class, 'index'])->name('academic.index');
+    Route::post('academic', [AcademicController::class, 'store'])->name('academic.store');
+    Route::put('academic/{academic}', [AcademicController::class, 'update'])->name('academic.update');
+    Route::delete('academic/{academic}', [AcademicController::class, 'destroy'])->name('academic.destroy');
+
+    // non academic
+    Route::get('dashboard/non_academic', [Non_AcademicController::class, 'index'])->name('non_academic.index');
+    Route::post('non_academic', [Non_AcademicController::class, 'store'])->name('non_academic.store');
+    Route::put('non_academic/{non_academic}', [Non_AcademicController::class, 'update'])->name('non_academic.update');
+    Route::delete('non_academic/{non_academic}', [Non_AcademicController::class, 'destroy'])->name('non_academic.destroy');
 
 });
 

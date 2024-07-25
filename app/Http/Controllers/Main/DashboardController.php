@@ -17,6 +17,27 @@ class DashboardController extends Controller
         return view('main.index', get_defined_vars());
     }
 
+    public function thank_you()
+    {
+        // $total_users = DB::table('users')->where('role','student')->count();
+
+        return view('main.thank_you', get_defined_vars());
+    }
+
+    public function filter_page()
+    {
+        // $total_users = DB::table('users')->where('role','student')->count();
+
+        return view('main.filter_data', get_defined_vars());
+    }
+
+    public function profile_page()
+    {
+        // $total_users = DB::table('users')->where('role','student')->count();
+
+        return view('main.profile', get_defined_vars());
+    }
+
     public function dashboard()
     {
         $user_id = auth()->id();

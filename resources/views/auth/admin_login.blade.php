@@ -32,7 +32,7 @@
                     <div class="account-wrapper">
                         <div class="account-logo" style="color:black; font-size:30px; font-family: Arial, sans-serif; font-weight:bold !important;">
                             <a href="{{ url('/') }}"></a>
-                            MarkNotifier!
+                            Jobee!
                                 <!-- <img src="" alt="Preadmin"> -->
                             </a><br>
                         </div>
@@ -55,7 +55,7 @@
                                 <input class="form-control floating" type="password" name="password" required autocomplete="current-password" />
                             </div>
                             <div class="form-group text-center">
-                                <button class="btn btn-primary btn-block account-btn text-dark" type="submit" style="background: #9FF9C7 !important;">Login</button>
+                                <button class="btn btn-info btn-block account-btn" type="submit">Login</button>
                             </div>
                             <div class="text-center d-none">
                                 <a href="forgot-password.html">Forgot your password?</a>

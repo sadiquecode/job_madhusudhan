@@ -217,6 +217,8 @@ class RegisterController extends Controller
     {
         $userId = Crypt::decrypt($request->uid);
         $user = User::find($userId);
+
+        // dd($user);
         $view = 'auth.profile';
         $head = 'Edit Profile';
         $title = 'Edit Profile Page';
@@ -233,7 +235,8 @@ class RegisterController extends Controller
     }
 
     public function update_profile(Request $request, User $user)
-    {   
+    {
+
         if ($request->param == 'reset_password') {
             $user = Auth::user();
             $request->validate([
@@ -262,37 +265,19 @@ class RegisterController extends Controller
                 'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
                 'name' => 'required|string|max:255',
                 'lname' => 'nullable|string|max:255',
-                'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20',
-                'description' => 'nullable',
-                'video_url' => 'nullable|url',
-                'zip_code' => 'nullable',
-                'virtual_mode' => 'nullable',
-                'in_person_mode' => 'nullable',
+                'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20'
             ]);
 
 
 
-            $virtual_mode = '';
-            $in_person_mode = '';
-            if (isset($request->virtual_mode)) {
-                $virtual_mode = $request->virtual_mode;
-            }
-            if (isset($request->in_person_mode)) {
-                $in_person_mode = $request->in_person_mode;
-            }
             $user->name = $validatedData['name'];
             $user->lname = $validatedData['lname'];
             $user->phone = $validatedData['phone'];
-            $user->description = $validatedData['description'];
-            $user->video_url = $validatedData['video_url'];
-            $user->virtual_mode = $virtual_mode;
-            $user->in_person_mode = $in_person_mode;
 
 if ($request->hasFile('profile_pic')) {
 
         // Attempt to delete the old profile picture
     Storage::delete('public/' . $user->profile_pic);
-    Storage::delete('public/' . $user->blur_profile_pic);
     // Get the uploaded image
     $image = $request->file('profile_pic');
     
@@ -303,22 +288,13 @@ if ($request->hasFile('profile_pic')) {
     $imageResource = imagecreatefromstring(file_get_contents('storage/app/public/' . $imagePath));
     
     $smallImageResource = imagescale($imageResource, 10, 10);
-    $blurredImageResource = imagescale($smallImageResource, imagesx($imageResource), imagesy($imageResource));
-    
-    // Save the blurred image to the same directory
-    $blurImagePath = 'public/' . dirname($imagePath) . '/blur_' . basename($imagePath);
 
-    imagejpeg($blurredImageResource, storage_path('app/' . $blurImagePath));
-
-    
     // Free memory
     imagedestroy($imageResource);
     imagedestroy($smallImageResource);
-    imagedestroy($blurredImageResource);
     
     // Update the user's profile pic and blurred profile pic paths
     $user->profile_pic = $imagePath;
-    $user->blur_profile_pic = str_replace('public/', '', $blurImagePath); // Adjust path format
     
 } else {
     $user->profile_pic = $request->old_profile_pic;
@@ -335,6 +311,7 @@ if ($request->hasFile('profile_pic')) {
         }
         return redirect('profile/'.encrypt(Auth::user()->id))->with('success', 'Profile updated successfully');
     }
+}
 
 
     public function del_data($type, $data_id)

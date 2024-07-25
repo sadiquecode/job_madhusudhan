@@ -1,17 +1,9 @@
-import "./dist/bootstrap.bundle.min.js";
-
-(() => {
-  "use strict";
-
-  // Disable empty links
-  document.querySelectorAll('[href="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-    });
-  });
-
-  // Enable tooltips
-  document
-    .querySelectorAll('[data-bs-toggle="tooltip"]')
-    .forEach((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
-})();
+function updateLabel(inputId, spanId) {
+    var input = document.getElementById(inputId);
+    var fileNameSpan = document.getElementById(spanId);
+    if (input.files.length > 0) {
+        fileNameSpan.textContent = input.files[0].name;
+    } else {
+        fileNameSpan.textContent = 'No file uploaded';
+    }
+}

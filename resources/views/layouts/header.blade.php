@@ -1,7 +1,7 @@
 <div class="header">
     <div class="header-left">
-        <a href="{{url('/dashboard')}}" class="logo" style="color:black; font-size:20px;font-family: Arial, sans-serif;">
-        MarkNotifier!
+        <a href="{{url('/dashboard')}}" class="logo" style="color:black; font-size:30px;font-family: Arial, sans-serif; font-wfont-weight:bold;">
+        Jobee!
             <!-- <img src="" width="100" height="50" alt=""> -->
         </a>
     </div>
@@ -17,7 +17,7 @@
                     @if (empty(Auth::user()->profile_pic))
                     <img class="rounded-circle" src="{{ url('public/assets/img/user.jpg') }}" width="40" alt="Admin">
                     @else
-                    <img class="rounded-circle" src="{{ url(Auth::user()->profile_pic) }}" width="40" height="40" alt="Admin">
+                    <img class="rounded-circle" src="{{ url(env('img_path'). Auth::user()->profile_pic) }}" width="40" height="40" alt="Admin">
                     @endif
                     
                     <span class="status online"></span>

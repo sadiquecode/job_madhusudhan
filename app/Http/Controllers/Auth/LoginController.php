@@ -27,9 +27,12 @@ class LoginController extends Controller
 
         public function showLoginForm()
     {
+
         if (auth()->check()) {
             return redirect('/dashboard');
         }
+
+        return redirect('login/admin');
 
         $title = 'Login';
         $description = 'Get access to the best tutors platform.';
@@ -38,7 +41,7 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {
+    {   
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
