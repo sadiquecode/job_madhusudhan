@@ -136,6 +136,42 @@ button {
 }
 
 /* ==================== Applied JOB End ==================== */
+/* ==================== Applied JOB Start ==================== */
+.profile-header {
+    background-color: #b3e6b3;
+    padding         : 20px;
+    text-align      : center;
+}
+
+.profile-header img {
+    padding      : 10px;
+    border       : 1px solid gray;
+    border-radius: 10%;
+    width        : 200px;
+    height       : 200px;
+}
+
+.section-title {
+    font-weight: bold;
+    font-size  : 30px;
+    margin     : 20px 0;
+}
+
+.about-me {
+    border-right: 2px solid #000000;
+}
+
+.qualification .border_b {
+    border-bottom: 2px solid #000000 !important;
+}
+
+.about-me,
+.qualification {
+    padding   : 10px;
+    min-height: 100vh;
+}
+
+/* ==================== Applied JOB End ==================== */
 /* ==================== Thank you Start ==================== */
 .thank-you-container {
     height         : 100vh;
@@ -156,3 +192,33 @@ button {
 }
 
 /* ==================== Thank you End ==================== */
+
+
+@media(max-width: 767.98px) {
+    .profile-header img {
+        width : 100px;
+        height: 100px;
+    }
+
+    .about-me,
+    .qualification {
+        padding   : 10px;
+        min-height: auto;
+    }
+
+    .about-me {
+        border-right: none;
+    }
+
+    .qualification .border_b {
+        border-bottom: none !important;
+    }
+
+    .profile-header {
+        padding: 10px;
+    }
+
+    .section-title {
+        margin: auto;
+    }
+}
