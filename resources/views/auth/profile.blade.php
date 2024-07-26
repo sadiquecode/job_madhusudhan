@@ -18,11 +18,6 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="param" value="main">
-                <input type="hidden" name="description" value="">
-                <input type="hidden" name="video_url" value="">
-                <input type="hidden" name="virtual_mode" value="">
-                <input type="hidden" name="in_person_mode" value="">
-                <input type="hidden" name="zip_code" value="">
                 <div class="card-box">
                     <h3 class="card-title">Basic Informations</h3>
                     <div class="row">

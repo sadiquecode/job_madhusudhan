@@ -5,7 +5,7 @@
             <ul>
                 <li class="menu-title">MAIN</li>
                 <li class="{{ request()->is('dashboard') ? 'active' : '' }}">
-                    <a href="{{url('/dashboard')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="{{url('/dashboard')}}"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
 
@@ -15,10 +15,28 @@
                 </li> -->
                 
 
-                <li class="{{ request()->is('dashboard/result') ? 'active' : '' }}">
-                    <a href="{{url('dashboard/result')}}"><i class="fas fa-school"></i> Results</a>
+                <li class="{{ request()->is('dashboard/subject') ? 'active' : '' }}">
+                    <a href="{{url('dashboard/subject')}}"><i class="fa fa-arrow-right"></i> Subjects</a>
                 </li>
-               
+                
+                <li class="{{ request()->is('dashboard/speciality') ? 'active' : '' }}">
+                    <a href="{{url('dashboard/speciality')}}"><i class="fas fa-arrow-right"></i> Speciality</a>
+                </li>
+                </li>
+                
+                <li class="{{ request()->is('dashboard/expertise') ? 'active' : '' }}">
+                    <a href="{{url('dashboard/expertise')}}"><i class="fas fa-arrow-right"></i> Expertise</a>
+                </li>
+                </li>
+                
+                <li class="{{ request()->is('dashboard/academic') ? 'active' : '' }}">
+                    <a href="{{url('dashboard/academic')}}"><i class="fas fa-arrow-right"></i> Academic</a>
+                </li>
+                </li>
+                
+                <li class="{{ request()->is('dashboard/non_academic') ? 'active' : '' }}">
+                    <a href="{{url('dashboard/non_academic')}}"><i class="fas fa-arrow-right"></i> Non Academic</a>
+                </li>
                 
 
                 <br><br><br>
