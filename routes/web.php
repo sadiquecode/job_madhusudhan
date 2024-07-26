@@ -34,10 +34,12 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])->name('password.update');
 
 
+Route::post('submit_application', [DashboardController::class, 'submit_application'])->name('submit_application');
 
 Route::get('/thank_you', [DashboardController::class, 'thank_you'])->name('thank_you');
 Route::get('/filter_page', [DashboardController::class, 'filter_page'])->name('filter_page');
 Route::get('/profile_page', [DashboardController::class, 'profile_page'])->name('profile_page');
+
 Route::middleware(['auth'])->group(function () {
 
 

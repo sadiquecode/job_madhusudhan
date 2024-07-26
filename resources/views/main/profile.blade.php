@@ -48,18 +48,12 @@
 
     <div class="container my-5">
         <div class="jobform">
-            <div class="py-5">
-                <a href="{{url('dashboard')}}" class="btn d-inline-flex align-items-center fw-bold btn-primary gap-2"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff"
-                        class="bi bi-sign-turn-left-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM7 8.466a.25.25 0 0 1-.41.192L4.23 6.692a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V6h1.5A2.5 2.5 0 0 1 11 8.5V11h-1V8.5A1.5 1.5 0 0 0 8.5 7H7z" />
-                    </svg>Back</a>
-            </div>
             <div class="row profile-header">
+
                 <div class="col-md-2">
-                    <img src="{{url('public/theme_assets/image/profile_page.webp')}}" alt="Profile Picture">
+                    <img class="img-fluid" src="{{url('public/theme_assets/image/profile_page.webp')}}" alt="Profile Picture">
                 </div>
+                
                 <div class="col-md-10 text-start">
                     <h2>Mr. Johen</h2>
                     <p class="mb-0 pt-4">#90, 2nd cross, Vinayaka Layout, opposite IIHMR, Bangalore, KARNATAKA-560105.
@@ -92,9 +86,22 @@
                     <div class="border"></div>
                 </div>
             </div>
+
+            
+            <div class="py-5">
+                <a href="{{url('dashboard')}}" class="btn d-inline-flex align-items-center fw-bold btn-primary gap-2"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff"
+                        class="bi bi-sign-turn-left-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM7 8.466a.25.25 0 0 1-.41.192L4.23 6.692a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V6h1.5A2.5 2.5 0 0 1 11 8.5V11h-1V8.5A1.5 1.5 0 0 0 8.5 7H7z" />
+                    </svg>Back</a>
+            </div>
+
+            
         </div>
     </div>
 
+    
     <!-- Bootstrap JS -->
     <script src="{{ url('public/theme_assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
 </body>

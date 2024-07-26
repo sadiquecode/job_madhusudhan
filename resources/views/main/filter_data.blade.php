@@ -21,8 +21,13 @@
                         <path
                             d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM7 8.466a.25.25 0 0 1-.41.192L4.23 6.692a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V6h1.5A2.5 2.5 0 0 1 11 8.5V11h-1V8.5A1.5 1.5 0 0 0 8.5 7H7z" />
                     </svg>Back</a>
+                    
             </div>
+
+            <h2 style="text-align:center; color:red" class="mb-2">Comming Soon</h2><br><br>
+            
             <div class="container">
+                
                 <div class="row pb-5">
                     <div class="col-4 text-center">
                         <button type="button" class="btn btn-danger position-relative fw-semibold">
