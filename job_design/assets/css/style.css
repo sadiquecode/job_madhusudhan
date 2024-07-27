@@ -113,7 +113,7 @@ button {
 
 .form-check-input:checked[type=checkbox] {
     background-image: url('../image/check-mark.png') !important;
-    background-color: white;
+    background-color: white !important;
 }
 
 .form-check-input {
