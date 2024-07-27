@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>job application form</title>
+    <title>Job Application Form</title>
     <!-- Custom CSS  -->
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- Bootstrap CSS  -->
@@ -14,11 +14,14 @@
 <body>
     <div class="container my-5">
         <div class="jobform">
-            <h1 class="text-center text-uppercase py-5 fw-bold">apply for jobs</h1>
-            <form action="">
+            <h1 class="text-center text-uppercase py-5 fw-bold">Apply for Jobs</h1>
+            <form action="" class="needs-validation" novalidate>
                 <div class="mb-3">
-                    <input type="name" class="form-control shadow-none" id="applicantinput"
-                        placeholder="Applicant Name">
+                    <input type="text" class="form-control shadow-none" id="applicantinput" placeholder="Applicant Name"
+                        required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="fileInput1" class="form-label fw-bold">Upload Passport Size Photo</label>
@@ -32,7 +35,10 @@
                                 </svg>Browse
                             </label>
                             <input type="file" class="shadow-none border-0" id="fileInput1"
-                                onchange="updateLabel('fileInput1', 'fileName1')">
+                                onchange="updateLabel('fileInput1', 'fileName1')" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
                         <span id="fileName1" class="file-name text-muted">No file uploaded</span>
                     </div>
@@ -42,25 +48,38 @@
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <input type="name" class="form-control shadow-none" id="fatherinput"
-                                    placeholder="Father's Name">
+                                    placeholder="Father's Name" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
-                                <input type="date" class="form-control shadow-none" id="date">
+                                <input type="date" class="form-control shadow-none" id="date" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 me-md-1">
-                                <input type="name" class="form-control shadow-none" id="casteinput" placeholder="Caste">
+                                <input type="name" class="form-control shadow-none" id="casteinput" placeholder="Caste"
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
                                 <input type="name" class="form-control shadow-none" id="martialinput"
-                                    placeholder="Martial Staus">
+                                    placeholder="Martial Staus" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,13 +87,19 @@
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <input type="name" class="form-control shadow-none" id="languagesinput"
-                                    placeholder="Languages Known">
+                                    placeholder="Languages Known" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
                                 <input type="name" class="form-control shadow-none" id="qualificationinput"
-                                    placeholder="Qualification">
+                                    placeholder="Qualification" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -273,13 +298,19 @@
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <input type="text" class="form-control shadow-none" id="presentlyinput"
-                                    placeholder="Presently working at / Fresher">
+                                    placeholder="Presently working at / Fresher" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
                                 <input type="text" class="form-control shadow-none" id="previousinput"
-                                    placeholder="Previous experience in months / years">
+                                    placeholder="Previous experience in months / years" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -287,13 +318,19 @@
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <input type="text" class="form-control shadow-none" id="casteinput"
-                                    placeholder="Salary Expected">
+                                    placeholder="Salary Expected" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
                                 <input type="text" class="form-control shadow-none" id="martialinput"
-                                    placeholder="Salary Drawn">
+                                    placeholder="Salary Drawn" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -301,7 +338,10 @@
                         <div class="col-md-12 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <textarea type="text" class="form-control shadow-none" id="languagesinput"
-                                    placeholder="Address"></textarea>
+                                    placeholder="Address" required></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -309,13 +349,19 @@
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <input type="email" class="form-control shadow-none" id="qualificationinput"
-                                    placeholder="Email-ID">
+                                    placeholder="Email-ID" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
                                 <input type="number" class="form-control shadow-none" id="languagesinput"
-                                    placeholder="+91">
+                                    placeholder="+91" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -332,14 +378,21 @@
                                 </svg>Browse
                             </label>
                             <input type="file" class="shadow-none border-0" id="fileInput2"
-                                onchange="updateLabel('fileInput2', 'fileName2')">
+                                onchange="updateLabel('fileInput2', 'fileName2')" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
                         <span id="fileName2" class="file-name text-muted">No file uploaded</span>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="democlassInput" class="form-label fw-bold">Demo Class Video Link (Optional)</label>
-                    <input type="text" class="form-control" id="democlassInput" placeholder="Demo Class Video Link">
+                    <input type="text" class="form-control" id="democlassInput" placeholder="Demo Class Video Link"
+                        required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
                 <div class="container">
                     <div class="row">
@@ -373,17 +426,27 @@
                             </label>
                         </div>
                     </div>
-
+                </div>
+                <div class="col-12 mt-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                        <label class="form-check-label" for="invalidCheck">
+                            Agree to terms and conditions
+                        </label>
+                        <div class="invalid-feedback">
+                            You must agree before submitting.
+                        </div>
+                    </div>
                 </div>
                 <div class="submitbtn py-5 text-center">
-                    <a href="thanku.html" class="btn btn-danger fw-bold px-3 rounded-0">Submit</a>
+                    <button class="btn btn-danger fw-bold px-3 rounded-0" type="submit">Submit</button>
                 </div>
                 <a class="btn btn-outline-warning fw-bold" href="appliedjob.html">Applied JOB</a>
                 <a class="btn btn-outline-warning fw-bold" href="epplieddata.html">Applied DATA</a>
+                <a class="btn btn-outline-warning fw-bold" href="thanku.html">Thank you</a>
             </form>
         </div>
     </div>
-
     <!-- Bootstrap JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
