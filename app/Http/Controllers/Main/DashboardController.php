@@ -23,8 +23,21 @@ class DashboardController extends Controller
         $expertise = Expertise::where('status','active')->get();
         $speciality = Speciality::where('status','active')->get();
         $subject = Subject::where('status','active')->get();
+
+        // $combined = $academic->merge($non_academic);
+        // dd($combined);
         return view('main.index', get_defined_vars());
     }
+
+    public function submit_application(Request $request)
+    {
+
+        dd($request->all());
+        // $total_users = DB::table('users')->where('role','student')->count();
+
+        return view('main.thank_you', get_defined_vars());
+    }
+    
 
     public function thank_you()
     {
