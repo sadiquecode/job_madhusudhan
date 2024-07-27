@@ -4,44 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Application Profile</title>
+    <title>job application form</title>
     <!-- Custom CSS  -->
     <link href="{{ url('public/theme_assets/css/style.css')}}" rel="stylesheet">
     <!-- Bootstrap CSS  -->
     <link href="{{ url('public/theme_assets/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
-    <style>
-        .profile-header {
-            background-color: #b3e6b3;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .profile-header img {
-            border-radius: 10%;
-            width: 100px;
-            height: 100px;
-        }
-
-        .section-title {
-            font-weight: bold;
-            font-size: 30px;
-            margin: 20px 0;
-        }
-
-        .about-me {
-            border-right: 2px solid #000000;
-        }
-
-        .qualification .border {
-            border-bottom: 2px solid #000000 !important;
-        }
-
-        .about-me,
-        .qualification {
-            padding: 10px;
-            min-height: 100vh;
-        }
-    </style>
 </head>
 
 <body>
@@ -49,14 +16,13 @@
     <div class="container my-5">
         <div class="jobform">
             <div class="row profile-header">
-
-                <div class="col-md-2">
-                    <img class="img-fluid" src="{{url('public/theme_assets/image/profile_page.webp')}}" alt="Profile Picture">
+                <div class="col-md-4">
+                    <img class="rounded-5" src="{{url('public/theme_assets/image/profile_page.webp')}}" alt="Profile Picture">
                 </div>
-                
-                <div class="col-md-10 text-start">
-                    <h2>Mr. Johen</h2>
-                    <p class="mb-0 pt-4">#90, 2nd cross, Vinayaka Layout, opposite IIHMR, Bangalore, KARNATAKA-560105.
+                <div class="col-md-8 text-start">
+                    <h2>Mr. Praveen</h2>
+                    <p class="mb-0 pt-md-4">#90, 2nd cross, Vinayaka Layout, opposite IIHMR, Bangalore,
+                        KARNATAKA-560105.
                         INDIA</p>
                 </div>
             </div>
@@ -83,11 +49,11 @@
                     <p><strong>Salary Drawn:</strong></p>
                     <p><strong>Referred By:</strong></p>
                     <p><strong>E-Mail id:</strong></p>
-                    <div class="border"></div>
+                    <div class="border_b"></div>
                 </div>
             </div>
 
-            
+
             <div class="py-5">
                 <a href="{{url('dashboard')}}" class="btn d-inline-flex align-items-center fw-bold btn-primary gap-2"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff"
@@ -97,11 +63,8 @@
                     </svg>Back</a>
             </div>
 
-            
         </div>
     </div>
-
-    
     <!-- Bootstrap JS -->
     <script src="{{ url('public/theme_assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
 </body>
