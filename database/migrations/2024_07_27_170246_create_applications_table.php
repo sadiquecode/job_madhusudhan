@@ -27,10 +27,15 @@ return new class extends Migration
             $table->string('salary_drawn')->nullable();
             $table->string('email')->nullable();
             $table->string('number')->nullable();
-            $table->string('democlass')->nullable()->nullable();
+            $table->string('democlass')->nullable();
             $table->enum('referredBy', ['newspaper', 'socialmedia', 'friends', 'others'])->nullable();
             $table->string('profile_img')->nullable();
             $table->string('cv')->nullable();
+            $table->foreignId('academic_id')->nullable()->constrained('academic')->onDelete('set null');
+            $table->foreignId('non_academic_id')->nullable()->constrained('non_academic')->onDelete('set null');
+            $table->foreignId('speciality_id')->nullable()->constrained('speciality')->onDelete('set null');
+            $table->foreignId('expertise_id')->nullable()->constrained('expertise')->onDelete('set null');
+            $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -33,35 +33,36 @@ class Application extends Model
         'referredBy',
         'profile_img',
         'cv',
+        'academic_id',
+        'non_academic_id',
+        'speciality_id',
+        'expertise_id',
+        'subject_id'
     ];
 
-
-    public function academics()
+    // Relationships
+    public function academic()
     {
-        return $this->belongsToMany(Academic::class, 'academic_application');
+        return $this->belongsTo(Academic::class, 'academic_id');
     }
 
-    public function nonAcademics()
+    public function nonAcademic()
     {
-        return $this->belongsToMany(Non_academic::class, 'non_academic_application');
+        return $this->belongsTo(Non_academic::class, 'non_academic_id');
     }
 
-    public function specialities()
+    public function speciality()
     {
-        return $this->belongsToMany(Speciality::class, 'specialities_application');
+        return $this->belongsTo(Speciality::class, 'speciality_id');
     }
 
-    public function expertises()
+    public function expertise()
     {
-        return $this->belongsToMany(Expertise::class, 'expertise_application');
+        return $this->belongsTo(Expertise::class, 'expertise_id');
     }
 
-    public function subjects()
+    public function subject()
     {
-        return $this->belongsToMany(Subject::class, 'subject_application');
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
-
-    protected $casts = [
-        'date' => 'date',
-    ];
 }

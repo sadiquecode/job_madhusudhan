@@ -36,9 +36,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('submit_application', [DashboardController::class, 'submit_application'])->name('submit_application');
 
-Route::get('/thank_you', [DashboardController::class, 'thank_you'])->name('thank_you');
-Route::get('/filter_page', [DashboardController::class, 'filter_page'])->name('filter_page');
-Route::get('/profile_page', [DashboardController::class, 'profile_page'])->name('profile_page');
+Route::get('/thank-you', [DashboardController::class, 'thank_you'])->name('thank-you');
+Route::get('/filter-page', [DashboardController::class, 'filter_page'])->name('filter_page');
+Route::get('/application-details/{app_id}', [DashboardController::class, 'application_details'])->name('application_details');
 
 Route::middleware(['auth'])->group(function () {
 
