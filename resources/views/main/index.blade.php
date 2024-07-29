@@ -78,10 +78,14 @@
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
-                                <input name="martial_status" type="text" class="form-control shadow-none" value="" required id="martialinput"
-                                    placeholder="Martial Staus">
+                                <select name="martial_status" class="form-control shadow-none" required id="martialinput">
+                                    <option value="" disabled selected>Marital Status</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Unmarried">Unmarried</option>
+                                </select>
                             </div>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-12 px-0">
@@ -97,6 +101,26 @@
                             </div>
                         </div>
                     </div>
+
+
+<div class="row">
+    <div class="col-12 px-0">
+        <h6 class="fw-bold">Applied Type</h6>
+    </div>
+</div>
+                    
+<div class="row">
+    <?php foreach ($Datatypes as $key) { ?>
+        <div class="col-lg-4 col-6 form-check">
+            <input class="form-check-input shadow-none" type="radio" required name="type" value="academic_<?=$key->id?>" id="academic_<?=$key->id?>" onclick="togglesubmit(false)">
+            <label class="form-check-label" for="academic_<?=$key->id?>">
+                <?=$key->title?>
+            </label>
+        </div>
+    <?php } ?>
+</div>
+<br>
+                    
                     <div class="row">
                         <div class="col-12 px-0">
                             <h6 class="fw-bold">Post Applied For</h6>
@@ -254,7 +278,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="democlassInput" class="form-label fw-bold">Demo Class Video Link (Optional)</label>
-                    <input type="text" name="democlass" value="" class="form-control" id="democlassInput" placeholder="Demo Class Video Link" required>
+                    <input type="text" name="democlass" value="" class="form-control" id="democlassInput" placeholder="Demo Class Video Link">
                 </div>
                 
                 <div class="container">

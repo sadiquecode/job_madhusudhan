@@ -34,7 +34,7 @@
     <script type="text/javascript" src="{{url('public/assets/daterange/moment.min.js')}}"></script>
     <script type="text/javascript" src="{{url('public/assets/daterange/daterangepicker.min.js')}}"></script>
 
-
+    
 
 <script>
 $(document).ready(function() {
@@ -57,6 +57,30 @@ $(document).ready(function() {
         //     'pdf', // Export to PDF
         //     'print' // Print button
         // ]
+    });
+
+
+
+   $('#data_types_id').on('change', function() {
+        var datatypeId = $(this).val();
+        var base_url = "{{ url('/') }}";
+        if (datatypeId) {
+            $.ajax({
+                url: base_url+'/get-specialities/' + datatypeId,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $('#speciality_id').empty();
+                    $('#speciality_id').append('<option value="" disabled selected>Select Speciality</option>');
+                    $.each(data, function(key, value) {
+                        $('#speciality_id').append('<option value="' + value.id + '">' + value.title + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#speciality_id').empty();
+            $('#speciality_id').append('<option value="" disabled selected>Select Speciality</option>');
+        }
     });
 
 });

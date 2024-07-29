@@ -38,8 +38,9 @@
                 <thead>
                     <tr>
                         <th>S/L</th>
+                        <th>Type</th>
+                        <th>Speciality</th>
                         <th>Title</th>
-                        <th>Nick Name</th>
                         <th>Status</th>
                         <th class="text-right">Action</th>
                     </tr>
@@ -47,9 +48,10 @@
                 <tbody>
                     @foreach ($TeachmeSubject as $index => $subject)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $subject->title }}</td>
-                        <td>{{ $subject->nick_name }}</td>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $subject->speciality->dataType->title }}</td>
+                    <td>{{ $subject->speciality->title }}</td>
+                    <td>{{ $subject->title }}</td>
                         <td>
                             @if($subject->status === 'active')
                             <span class="p-2 badge badge-primary">Active</span>
@@ -113,6 +115,21 @@
                                         </div>
                                         
                                         <div class="col-sm-12">
+        <div class="form-group form-focus select-focus">
+            <label class="focus-label">Type</label>
+            <select class="select floating" name="data_types_id">
+                @foreach ($Datatypes as $key)
+                @if ($subject->data_types_id == $key->id)
+                <option value="{{$key->id}}" selected>{{ucfirst($key->title)}}</option>
+                @else
+                <option value="{{$key->id}}">{{ucfirst($key->title)}}</option>
+                @endif
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="col-form-label">Status <span class="text-danger">*</span></label>
                                                 <select name="status" class="select floating">
@@ -154,19 +171,41 @@
 <form class="m-b-30" action="{{ route('subject.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
-        <div class="col-sm-12">
+
+
+
+       
+<div class="col-sm-12">
+    <div class="form-group form-focus select-focus">
+        <label class="focus-label">Type</label>
+        <select class="select floating" name="data_types_id" id="data_types_id">
+            <option value="" disabled selected>Select Type</option>
+            @foreach ($Datatypes as $datatype)
+                <option value="{{ $datatype->id }}">{{ ucfirst($datatype->title) }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="form-group form-focus select-focus">
+        <label class="focus-label">Speciality</label>
+        <select class="select floating" name="speciality_id" id="speciality_id">
+            <option value="" disabled selected>Select Speciality</option>
+            <!-- Options will be populated dynamically -->
+        </select>
+    </div>
+</div>
+
+
+    <div class="col-sm-12">
             <div class="form-group">
                 <label class="col-form-label">Title<span class="text-danger">*</span></label>
                 <input type="text" name="title" class="form-control">
             </div>
         </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label class="col-form-label">Nick Name<span class="text-danger">*</span></label>
-                <input type="text" name="nick_name" class="form-control">
-            </div>
-        </div>
-        
+
+
         <div class="col-sm-12">
             <div class="form-group form-focus select-focus">
                 <label class="focus-label">Status</label>

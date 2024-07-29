@@ -36,6 +36,7 @@
                 <tr>
                     <th>S/L</th>
                     <th>Title</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th class="text-right">Action</th>
                 </tr>
@@ -45,6 +46,7 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $grade->title }}</td>
+                    <td>{{ $grade->dataType->title }}</td>
                     <td>
                         @if($grade->status === 'active')
                         <span class="p-2 badge badge-primary">Active</span>
@@ -102,6 +104,20 @@
                                     </div>
                                     
                                     <div class="col-sm-12">
+        <div class="form-group form-focus select-focus">
+            <label class="focus-label">Type</label>
+            <select class="select floating" name="data_types_id">
+                @foreach ($Datatypes as $key)
+                @if ($grade->data_types_id == $key->id)
+                <option value="{{$key->id}}" selected>{{ucfirst($key->title)}}</option>
+                @else
+                <option value="{{$key->id}}">{{ucfirst($key->title)}}</option>
+                @endif
+                @endforeach
+            </select>
+        </div>
+    </div>
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="col-form-label">Status <span class="text-danger">*</span></label>
                                             <select name="status" class="select floating">
@@ -150,6 +166,17 @@
         </div>
     </div>
     
+    <div class="col-sm-12">
+        <div class="form-group form-focus select-focus">
+            <label class="focus-label">Type</label>
+            <select class="select floating" name="data_types_id">
+                @foreach ($Datatypes as $key)
+                <option value="{{$key->id}}">{{ucfirst($key->title)}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
     <div class="col-sm-12">
         <div class="form-group form-focus select-focus">
             <label class="focus-label">Status</label>

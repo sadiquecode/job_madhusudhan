@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\GlobalDetails;
 
 use App\Models\GlobalDetails\Subject;
+use App\Models\GlobalDetails\Datatypes;
+use App\Models\GlobalDetails\Speciality;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -14,8 +16,15 @@ class TeachMeSubjectController extends Controller
 // index
     public function index(Request $request)
     {
-        $TeachmeSubject = Subject::get();
-        return view('golbal_details.subject', compact('TeachmeSubject'));
+        $Datatypes = Datatypes::get();
+        $TeachmeSubject = Subject::with('speciality.dataType')->get();
+        return view('golbal_details.subject', compact('TeachmeSubject','Datatypes'));
+    }
+
+    public function getSpecialities($datatypeId)
+    {
+        $specialities = Speciality::where('data_types_id', $datatypeId)->get();
+        return response()->json($specialities);
     }
 
 // store
@@ -23,13 +32,13 @@ class TeachMeSubjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string',
-            'nick_name' => 'required|string',
+            'speciality_id' => 'required|exists:specialities,id',
             'status' => 'required|string'
         ]);
 
        $fileUpload = new Subject;
        $fileUpload->title = $request->title;
-       $fileUpload->nick_name = $request->nick_name;
+       $fileUpload->speciality_id = $request->speciality_id;
        $fileUpload->status = $request->status;
        $fileUpload->save();
        return redirect()->back()->with('success', 'Subject created successfully.');
@@ -41,13 +50,15 @@ class TeachMeSubjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string',
-            'nick_name' => 'required|string',
+            'speciality_id' => 'required|exists:specialities,id',
             'status' => 'required|string'
         ]);
 
         $subject->update([
             'title' => $request->title,
             'nick_name' => $request->nick_name,
+            'data_types_id' => $request->data_types_id,
+            'speciality_id' => $request->speciality_id,
             'status' => $request->status
         ]);
 

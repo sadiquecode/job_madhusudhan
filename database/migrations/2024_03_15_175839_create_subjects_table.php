@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('speciality', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->foreignId('speciality_id')->nullable()->constrained('specialities')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('speciality');
+        Schema::dropIfExists('subjects');
     }
 };

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('specialities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('nick_name');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->foreignId('data_types_id')->nullable()->constrained('data_types')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('specialities');
     }
 };

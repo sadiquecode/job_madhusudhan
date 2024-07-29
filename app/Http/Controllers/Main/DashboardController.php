@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\GlobalDetails\Datatypes;
 use App\Models\GlobalDetails\Academic;
 use App\Models\GlobalDetails\Non_academic;
 use App\Models\GlobalDetails\Expertise;
@@ -18,9 +19,15 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // $total_users = DB::table('users')->where('role','student')->count();
+
+        $type = '';
+        if  (isset($request->type)) {
+            $type = $request->type;
+        }
+        $Datatypes = Datatypes::get();
         $academic = Academic::where('status','active')->get();
         $non_academic = Non_academic::where('status','active')->get();
         $expertise = Expertise::where('status','active')->get();
@@ -82,6 +89,7 @@ class DashboardController extends Controller
                 'profile_img' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048', // updated for file upload
                 'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // updated for file upload
                 'category' => 'required|string', // This field will hold either 'academic_{id}' or 'non_academic_{id}'
+                'data_types_id' => 'nullable|exists:data_types,id',
                 'speciality' => 'nullable|exists:speciality,id',
                 'expertise' => 'nullable|exists:expertise,id',
                 'subjects' => 'nullable|exists:subjects,id',

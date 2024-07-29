@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('subject', [TeachMeSubjectController::class, 'store'])->name('subject.store');
     Route::put('subject/{subject}', [TeachMeSubjectController::class, 'update'])->name('subject.update');
     Route::delete('subject/{subject}', [TeachMeSubjectController::class, 'destroy'])->name('subject.destroy');
+    Route::get('/get-specialities/{datatypeId}', [TeachMeSubjectController::class, 'getSpecialities']);
 
     // speciality
     Route::get('dashboard/speciality', [SpecialityController::class, 'index'])->name('speciality.index');

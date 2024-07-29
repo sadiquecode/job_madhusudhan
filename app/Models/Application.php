@@ -33,6 +33,7 @@ class Application extends Model
         'referredBy',
         'profile_img',
         'cv',
+        'data_types_id',
         'academic_id',
         'non_academic_id',
         'speciality_id',
