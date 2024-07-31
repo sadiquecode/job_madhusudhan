@@ -11,7 +11,7 @@ class Subject extends Model
 {
 
     protected $table = 'subjects';
-    protected $fillable = ['title','status','speciality_id'];
+    protected $fillable = ['title','status','data_types_id','speciality_id'];
 
     
     public function applications()

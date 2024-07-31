@@ -17,8 +17,9 @@ class TeachMeSubjectController extends Controller
     public function index(Request $request)
     {
         $Datatypes = Datatypes::get();
+        $Speciality = Speciality::get();
         $TeachmeSubject = Subject::with('speciality.dataType')->get();
-        return view('golbal_details.subject', compact('TeachmeSubject','Datatypes'));
+        return view('golbal_details.subject', compact('TeachmeSubject','Datatypes','Speciality'));
     }
 
     public function getSpecialities($datatypeId)
@@ -27,17 +28,19 @@ class TeachMeSubjectController extends Controller
         return response()->json($specialities);
     }
 
-// store
+    // store
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'title' => 'required|string',
+            'data_types_id' => 'required|exists:data_types,id',
             'speciality_id' => 'required|exists:specialities,id',
             'status' => 'required|string'
         ]);
 
        $fileUpload = new Subject;
        $fileUpload->title = $request->title;
+       $fileUpload->data_types_id = $request->data_types_id;
        $fileUpload->speciality_id = $request->speciality_id;
        $fileUpload->status = $request->status;
        $fileUpload->save();

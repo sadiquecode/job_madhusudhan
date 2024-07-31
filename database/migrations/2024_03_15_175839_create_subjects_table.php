@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->foreignId('data_types_id')->nullable()->constrained('data_types')->onDelete('set null');
             $table->foreignId('speciality_id')->nullable()->constrained('specialities')->onDelete('set null');
             $table->timestamps();
         });

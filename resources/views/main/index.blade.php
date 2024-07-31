@@ -103,110 +103,55 @@
                     </div>
 
 
+                    
+
 <div class="row">
-    <div class="col-12 px-0">
-        <h6 class="fw-bold">Applied Type</h6>
+        <div class="col-12 px-0">
+            <h6 class="fw-bold">Applied Type</h6>
+        </div>
     </div>
-</div>
-                    
-<div class="row">
-    <?php foreach ($Datatypes as $key) { ?>
-        <div class="col-lg-4 col-6 form-check">
-            <input class="form-check-input shadow-none" type="radio" required name="type" value="academic_<?=$key->id?>" id="academic_<?=$key->id?>" onclick="togglesubmit(false)">
-            <label class="form-check-label" for="academic_<?=$key->id?>">
-                <?=$key->title?>
-            </label>
+
+    <div class="row">
+        @foreach ($dataTypes as $type)
+            <div class="col-lg-4 col-6 form-check">
+                <input class="form-check-input shadow-none" type="radio" name="data_types_id" value="{{ $type->id }}" id="type{{ $type->id }}" onclick="loadPostAppliedFor({{ $type->id }})">
+                <label class="form-check-label" for="type{{ $type->id }}">
+                    {{ $type->title }}
+                </label>
+            </div>
+        @endforeach
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-12 px-0">
+            <h6 class="fw-bold">Post Applied For</h6>
         </div>
-    <?php } ?>
-</div>
-<br>
-                    
-                    <div class="row">
-                        <div class="col-12 px-0">
-                            <h6 class="fw-bold">Post Applied For</h6>
-                        </div>
-                    </div>
+    </div>
+    <div id="postAppliedFor"></div>
 
-<span style="color:red">Academic</span>
-<div class="row">
-    <?php foreach ($academic as $key) { ?>
-        <div class="col-lg-4 col-6 form-check">
-            <input class="form-check-input shadow-none" type="radio" required name="category" value="academic_<?=$key->id?>" id="academic_<?=$key->id?>" onclick="toggleNonAcademic(false)">
-            <label class="form-check-label" for="academic_<?=$key->id?>">
-                <?=$key->title?>
-            </label>
+    <div class="row">
+        <div class="col-12 px-0 pt-2 mt-3">
+            <h6 class="fw-bold">Expertise in</h6>
         </div>
-    <?php } ?>
-</div>
+    </div>
+    <div id="expertise"></div>
 
-<span style="color:red">Non Academic</span>
-<div class="row">
-    <?php foreach ($non_academic as $key) { ?>
-        <div class="col-lg-4 col-6 form-check">
-            <input class="form-check-input shadow-none" type="radio" required name="category" value="non_academic_<?=$key->id?>" id="non_academic_<?=$key->id?>" onclick="toggleAcademic(false)">
-            <label class="form-check-label" for="non_academic_<?=$key->id?>">
-                <?=$key->title?>
-            </label>
+    <div class="row">
+        <div class="col-12 px-0 pt-2 mt-3">
+            <h6 class="fw-bold">Specialized in</h6>
         </div>
-    <?php } ?>
-</div>
+    </div>
+    <div id="speciality"></div>
 
-                    
-
-                    <div class="row">
-                        <div class="col-12 px-0 pt-2 mt-3">
-                            <h6 class="fw-bold">Specialized in</h6>
-                        </div>
+    <div class="row">
+        <div class="col-12 px-0 pt-2 mt-3">
+            <h6 class="fw-bold">Subjects Handling</h6>
+        </div>
+    </div>
+    <div id="subjects"></div>
                     </div>
-
-                    <div class="row px-lg-3">
-                    <?php foreach ($speciality as $key) { ?>
-                        <div class="col-lg-2 col-6 form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="speciality" required value="<?=$key->id?>" id="speciality_<?=$key->id?>">
-                            <label class="form-check-label" for="speciality_<?=$key->id?>">
-                            <?=$key->title?>
-                            </label>
-                        </div>
-                    <?php } ?>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 px-0 pt-2 mt-3">
-                            <h6 class="fw-bold">Expertise in</h6>
-                        </div>
-                    </div>
-                    <div class="row px-lg-3">
-
-                    <?php foreach ($expertise as $key) { ?>
-                        <div class="col-lg-3 col-6 form-check">
-                            <input class="form-check-input shadow-none" type="radio" required name="expertise" value="<?=$key->id?>" id="expertise_<?=$key->id?>">
-                            <label class="form-check-label" for="expertise_<?=$key->id?>">
-                            <?=$key->title?>
-                            </label>
-                        </div>
-                    <?php } ?>
-
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col-12 px-0 pt-2 mt-3">
-                            <h6 class="fw-bold">Subjects Handling</h6>
-                        </div>
-                    </div>
-
-                    <div class="row px-lg-3">
-                    <?php foreach ($subject as $key) { ?>
-                        <div class="col-lg-2 col-12 form-check">
-                            <input class="form-check-input shadow-none" type="radio" required name="subjects" value="<?=$key->id?>" id="subject_<?=$key->id?>">
-                            <label class="form-check-label" for="subject_<?=$key->id?>">
-                            <?=$key->title?>
-                            </label>
-                        </div>
-                    <?php } ?>
-                    </div>
-                    
-                </div>
+            
                 <div class="container pt-3">
                     <div class="row">
                         <div class="col-md-6 col-12 px-0">
@@ -281,7 +226,7 @@
                     <input type="text" name="democlass" value="" class="form-control" id="democlassInput" placeholder="Demo Class Video Link">
                 </div>
                 
-                <div class="container">
+  <div class="container">
     <div class="row">
         <div class="col-12 px-0">
             <h6 class="fw-bold">Referred By</h6>
@@ -326,6 +271,122 @@
     <!-- Bootstrap JS -->
     <script src="{{ url('public/theme_assets/js/main.js')}}"></script>
     <script src="{{ url('public/theme_assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
+
+    <script>
+    var base_url = "{{ url('/') }}";
+
+    function loadPostAppliedFor(dataTypeId) {
+        clearDependentFields();
+
+        fetch(base_url+`/getPostAppliedFor/${dataTypeId}`)
+            .then(response => response.json())
+            .then(data => {
+                let postAppliedForHtml = '';
+
+                postAppliedForHtml += '<span style="color:red">Academic</span><div class="row">';
+                data.academics.forEach(item => {
+                    postAppliedForHtml += `
+                        <div class="col-lg-4 col-6 form-check">
+                            <input class="form-check-input shadow-none" type="radio" name="category" value="academic_${item.id}" id="academic_${item.id}" onclick="loadExpertise(${dataTypeId})">
+                            <label class="form-check-label" for="academic_${item.id}">${item.title}</label>
+                        </div>`;
+                });
+                postAppliedForHtml += '</div>';
+
+                postAppliedForHtml += '<span style="color:red">Non Academic</span><div class="row">';
+                data.nonAcademics.forEach(item => {
+                    postAppliedForHtml += `
+                        <div class="col-lg-4 col-6 form-check">
+                            <input class="form-check-input shadow-none" type="radio" name="category" value="non_academic_${item.id}" id="non_academic_${item.id}" onclick="loadExpertise(${dataTypeId})">
+                            <label class="form-check-label" for="non_academic_${item.id}">${item.title}</label>
+                        </div>`;
+                });
+                postAppliedForHtml += '</div>';
+
+                document.getElementById('postAppliedFor').innerHTML = postAppliedForHtml;
+            });
+    }
+
+
+    function loadExpertise(dataTypeId) {
+        clearFields(['expertise', 'speciality', 'subjects']);
+
+        fetch(base_url+`/getExpertise/${dataTypeId}`)
+            .then(response => response.json())
+            .then(data => {
+                let expertiseHtml = '<div class="row px-lg-3">';
+
+                data.forEach(item => {
+                    expertiseHtml += `
+                        <div class="col-lg-3 col-6 form-check">
+                            <input class="form-check-input shadow-none" type="radio" name="expertise" value="${item.id}" id="expertise_${item.id}" onclick="loadSpeciality(${dataTypeId})">
+                            <label class="form-check-label" for="expertise_${item.id}">${item.title}</label>
+                        </div>`;
+                });
+
+                expertiseHtml += '</div>';
+                document.getElementById('expertise').innerHTML = expertiseHtml;
+            });
+    }
+
+    function loadSpeciality(dataTypeId) {
+        clearFields(['speciality', 'subjects']);
+
+        fetch(base_url+`/getSpeciality/${dataTypeId}`)
+            .then(response => response.json())
+            .then(data => {
+                let specialityHtml = '<div class="row px-lg-3">';
+
+                data.forEach(item => {
+                    specialityHtml += `
+                        <div class="col-lg-2 col-6 form-check">
+                            <input class="form-check-input shadow-none" type="radio" name="speciality" value="${item.id}" id="speciality_${item.id}" onclick="loadSubjects(${item.id})">
+                            <label class="form-check-label" for="speciality_${item.id}">${item.title}</label>
+                        </div>`;
+                });
+
+                specialityHtml += '</div>';
+                document.getElementById('speciality').innerHTML = specialityHtml;
+            });
+    }
+
+    function loadSubjects(specialityId) {
+        fetch(base_url+`/getSubjects/${specialityId}`)
+            .then(response => response.json())
+            .then(data => {
+                let subjectsHtml = '<div class="row px-lg-3">';
+
+                data.forEach(item => {
+                    subjectsHtml += `
+                        <div class="col-lg-2 col-12 form-check">
+                            <input class="form-check-input shadow-none" type="radio" name="subjects" value="${item.id}" id="subject_${item.id}">
+                            <label class="form-check-label" for="subject_${item.id}">${item.title}</label>
+                        </div>`;
+                });
+
+                subjectsHtml += '</div>';
+                document.getElementById('subjects').innerHTML = subjectsHtml;
+            });
+    }
+
+
+
+    function clearDependentFields() {
+        document.getElementById('postAppliedFor').innerHTML = '';
+        document.getElementById('expertise').innerHTML = '';
+        document.getElementById('speciality').innerHTML = '';
+        document.getElementById('subjects').innerHTML = '';
+    }
+
+    function clearFields(fields) {
+        fields.forEach(field => {
+            document.getElementById(field).innerHTML = '';
+        });
+    }
+
+
+</script>
+
 </body>
 
 </html>

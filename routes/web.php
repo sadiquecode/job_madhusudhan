@@ -38,7 +38,16 @@ Route::post('submit_application', [DashboardController::class, 'submit_applicati
 
 Route::get('/thank-you', [DashboardController::class, 'thank_you'])->name('thank-you');
 Route::get('/filter-page', [DashboardController::class, 'filter_page'])->name('filter_page');
+Route::get('/filter/{filterType}/{typeId}', [DashboardController::class, 'getFilters']);
+Route::get('/destroyapp/{appid}', [DashboardController::class, 'destroyapp']);
+Route::post('/delete-bulk-records', [DashboardController::class, 'deleteBulkRecords'])->name('delete.bulk.records');
+
 Route::get('/application-details/{app_id}', [DashboardController::class, 'application_details'])->name('application_details');
+
+Route::get('/getPostAppliedFor/{dataTypeId}', [DashboardController::class, 'getPostAppliedFor']);
+Route::get('/getExpertise/{dataTypeId}', [DashboardController::class, 'getExpertise']);
+Route::get('/getSpeciality/{dataTypeId}', [DashboardController::class, 'getSpeciality']);
+Route::get('/getSubjects/{specialityId}', [DashboardController::class, 'getSubjects']);
 
 Route::middleware(['auth'])->group(function () {
 

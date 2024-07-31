@@ -59,6 +59,21 @@
 
             <div class="container">
 
+    <!-- Type Filter Buttons -->
+    <div class="headingtext text-center py-3">
+        <h6 class="fw-bold">Type</h6>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center mb-4">
+        @foreach ($types as $type)
+            <a href="{{url('filter-page?typeid=').$type->id}}" class="btn btn-sm btn-danger m-1 filter-btn rounded-5" data-filter="datatype-{{ $type->id }}">
+                {{ $type->title }}
+                <span class="badge rounded-pill bg-success">
+                    {{ $applications->where('data_types_id', $type->id)->count() }}
+                </span>
+            </a>
+        @endforeach
+    </div>
+
     <!-- Speciality Filter Buttons -->
     <div class="headingtext text-center py-3">
         <h6 class="fw-bold">Specialities</h6>
@@ -69,6 +84,21 @@
                 {{ $speciality->title }}
                 <span class="badge rounded-pill bg-success">
                     {{ $applications->where('speciality_id', $speciality->id)->count() }}
+                </span>
+            </button>
+        @endforeach
+    </div>
+
+    <!-- expertises Filter Buttons -->
+    <div class="headingtext text-center py-3">
+        <h6 class="fw-bold">Expertises</h6>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center mb-4">
+        @foreach ($expertises as $experty)
+            <button type="button" class="btn btn-sm btn-danger m-1 filter-btn rounded-5" data-filter="experty-{{ $experty->id }}">
+                {{ $experty->title }}
+                <span class="badge rounded-pill bg-success">
+                    {{ $applications->where('expertise_id', $experty->id)->count() }}
                 </span>
             </button>
         @endforeach
@@ -121,10 +151,21 @@
 
     <!-- Applications Table -->
     <div class="container">
+
+
+        <div class="row">
+            <div class="col-sm-12 text-center m-b-20">
+                <button type="button" class="btn-sm btn btn-secondary btn-rounded m-r-5" id="toggleSelectAll"><i class="fa fa-check"></i> Select All</button>
+                <button type="button" class="btn-sm btn btn-danger btn-rounded float-right m-r-5" onclick="startBulkDelete()"><i class="fa fa-trash"></i> Bulk Delete</button>
+            </div>
+        </div>
+
+
         <div class="table-responsive">
             <table class="table table-bordered" id="teachme_table">
                 <thead>
                     <tr>
+                        <th class="col">Select</th>
                         <th scope="col">SL.</th>
                         <th scope="col">NAME</th>
                         <th scope="col">YEAR AND EXP</th>
@@ -136,14 +177,20 @@
                 </thead>
                 <tbody id="applications-table">
                     @foreach ($applications as $key => $application)
-                        <tr data-speciality="speciality-{{ $application->speciality_id }}" data-academic="academic-{{ $application->academic_id }}" data-non-academic="non_academic-{{ $application->non_academic_id }}" data-subject="subject-{{ $application->subject_id }}">
+                        <tr data-datatype="datatype-{{ $application->data_types_id }}" data-speciality="speciality-{{ $application->speciality_id }}" data-experty="experty-{{ $application->expertise_id }}" data-academic="academic-{{ $application->academic_id }}" data-non-academic="non_academic-{{ $application->non_academic_id }}" data-subject="subject-{{ $application->subject_id }}">
+                            <td>
+                                <input type="checkbox" class="select-checkbox" data-id="{{ $application->id }}" />
+                            </td>    
                             <th scope="row">{{ $key + 1 }}.</th>
                             <td><a href="{{url('application-details/'.$application->id)}}" target="_blank">{{ $application->applicant_name }}</a></td>
                             <td>{{ $application->experience_years }}</td>
                             <td>{{ $application->qualification }}</td>
                             <td>{{ $application->address }}</td>
                             <td>{{ $application->salary_expected }}</td>
-                            <td><a href="{{ url('storage/app/'. $application->cv) }}" target="_blank" class="btn w-100 btn-sm rounded-0 btn-success fw-bold">Download</a></td>
+                            <td>
+                                <a href="{{ url('storage/app/'. $application->cv) }}" target="_blank" class="btn w-100 btn-sm rounded-0 btn-success fw-bold">Download</a>
+                                <a href="{{ url('destroyapp/'. $application->id) }}" onclick="return confirm('Are you sure you want to delete this application?');" class="btn w-100 btn-sm rounded-0 btn-danger fw-bold">Delete</a>
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -214,12 +261,14 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const filter = this.getAttribute('data-filter');
             tableRows.forEach(row => {
+                const datatype = row.getAttribute('data-datatype');
                 const speciality = row.getAttribute('data-speciality');
+                const experty = row.getAttribute('data-experty');
                 const academic = row.getAttribute('data-academic');
                 const nonAcademic = row.getAttribute('data-non-academic');
                 const subject = row.getAttribute('data-subject');
 
-                if (speciality === filter || academic === filter || nonAcademic === filter || subject === filter) {
+                if (datatype === filter || speciality === filter || experty === filter || academic === filter || nonAcademic === filter || subject === filter) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -229,8 +278,61 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+</script>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    let isAllSelected = false;
+
+    document.getElementById('toggleSelectAll').addEventListener('click', function() {
+        isAllSelected = !isAllSelected;
+        document.querySelectorAll('.select-checkbox').forEach((checkbox) => {
+            checkbox.checked = isAllSelected;
+        });
+
+        // Update button text based on selection status
+        this.textContent = isAllSelected ? 'Unselect All' : 'Select All';
+    });
+
+    // Attach the function to the bulk delete button
+    document.querySelector('.btn.btn-danger').addEventListener('click', startBulkDelete);
+});
+
+// Function to handle bulk deletion
+function startBulkDelete() {
+    var selectedIds = [];
+    document.querySelectorAll('.select-checkbox:checked').forEach(function(checkbox) {
+        selectedIds.push(checkbox.dataset.id);
+    });
+
+    if (selectedIds.length === 0) {
+        alert('Please select at least one entry.');
+        return;
+    }
+
+    if (!confirm('Are you sure you want to delete the selected records?')) {
+        return;
+    }
+
+    fetch('{{ route('delete.bulk.records') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ ids: selectedIds })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Records deleted successfully');
+        location.reload(); // Reload the page to reflect changes
+    })
+    .catch(error => {
+        console.error('Error deleting records:', error);
+        alert('Error deleting records. Check console for details.');
+    });
+}
 </script>
 
 </body>

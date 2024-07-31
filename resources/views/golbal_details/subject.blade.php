@@ -88,65 +88,69 @@
                         </div>
                     </div>
                 </div>
-                <div id="edit_subject_{{ $subject->id }}" class="modal custom-modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <div class="modal-content modal-lg">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Edit Subject</h4>
-                            </div>
-                            <div class="modal-body">
-                                
-                                <form class="m-b-30" action="{{ route('subject.update', $subject->id) }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="col-form-label">Title<span class="text-danger">*</span></label>
-                                                <input type="text" name="title" class="form-control" value="{{$subject->title}}">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="col-form-label">Nick Name<span class="text-danger">*</span></label>
-                                                <input type="text" name="nick_name" class="form-control" value="{{$subject->nick_name}}">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-12">
-        <div class="form-group form-focus select-focus">
-            <label class="focus-label">Type</label>
-            <select class="select floating" name="data_types_id">
-                @foreach ($Datatypes as $key)
-                @if ($subject->data_types_id == $key->id)
-                <option value="{{$key->id}}" selected>{{ucfirst($key->title)}}</option>
-                @else
-                <option value="{{$key->id}}">{{ucfirst($key->title)}}</option>
-                @endif
-                @endforeach
-            </select>
-        </div>
-    </div>
 
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="col-form-label">Status <span class="text-danger">*</span></label>
-                                                <select name="status" class="select floating">
-                                                    <option value="active" @if($subject->status === 'active') selected @endif>Active</option>
-                                                    <option value="inactive" @if($subject->status === 'inactive') selected @endif>Inactive</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m-t-20 text-center mb-5">
-                                        <button type="submit" class="btn btn-primary btn-lg">Update Subject</button>
-                                    </div>
-                                </form>
+                <div id="edit_subject_{{ $subject->id }}" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Subject</h4>
+            </div>
+            <div class="modal-body">
+                <form class="m-b-30" action="{{ route('subject.update', $subject->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group form-focus select-focus">
+                                <label class="focus-label">Type</label>
+                                <select class="select floating" name="data_types_id" id="data_types_id_{{ $subject->id }}">
+                                    @foreach ($Datatypes as $key)
+                                        <option value="{{ $key->id }}" @if ($subject->data_types_id == $key->id) selected @endif>{{ ucfirst($key->title) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group form-focus select-focus">
+                                <label class="focus-label">Speciality</label>
+                                <select class="select floating" name="speciality_id" id="speciality_id_{{ $subject->id }}">
+                                    @foreach ($Speciality as $key)
+                                        @if ($key->data_types_id == $subject->data_types_id)
+                                            <option value="{{ $key->id }}" @if ($subject->speciality_id == $key->id) selected @endif>{{ ucfirst($key->title) }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Title<span class="text-danger">*</span></label>
+                                <input type="text" name="title" class="form-control" value="{{ $subject->title }}">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Status <span class="text-danger">*</span></label>
+                                <select name="status" class="select floating">
+                                    <option value="active" @if($subject->status === 'active') selected @endif>Active</option>
+                                    <option value="inactive" @if($subject->status === 'inactive') selected @endif>Inactive</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="m-t-20 text-center mb-5">
+                        <button type="submit" class="btn btn-primary btn-lg">Update Subject</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
                 @endforeach
             </tbody>
         </table>
@@ -224,4 +228,42 @@
 </div>
 </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#data_types_id_{{ $subject->id }}').on('change', function() {
+            loadSpecialities({{ $subject->id }});
+        });
+    });
+
+    function loadSpecialities(subjectId) {
+        const dataTypeId = $(`#data_types_id_${subjectId}`).val();
+        const base_url = "{{ url('/') }}";
+        
+        if (dataTypeId) {
+            $.ajax({
+                url: `${base_url}/get-specialities/${dataTypeId}`,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $(`#speciality_id_${subjectId}`).empty();
+                    $(`#speciality_id_${subjectId}`).append('<option value="" disabled selected>Select Speciality</option>');
+                    $.each(data, function(key, value) {
+                        $(`#speciality_id_${subjectId}`).append('<option value="' + value.id + '">' + value.title + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', error);
+                }
+            });
+        } else {
+            $(`#speciality_id_${subjectId}`).empty();
+            $(`#speciality_id_${subjectId}`).append('<option value="" disabled selected>Select Speciality</option>');
+        }
+    }
+</script>
+
+
+
 @include('layouts.footer')

@@ -27,7 +27,7 @@ class DashboardController extends Controller
         if  (isset($request->type)) {
             $type = $request->type;
         }
-        $Datatypes = Datatypes::get();
+        $dataTypes = Datatypes::all();
         $academic = Academic::where('status','active')->get();
         $non_academic = Non_academic::where('status','active')->get();
         $expertise = Expertise::where('status','active')->get();
@@ -40,6 +40,32 @@ class DashboardController extends Controller
     }
 
     
+    public function getPostAppliedFor($dataTypeId)
+    {
+        $academics = Academic::where('data_types_id', $dataTypeId)->get();
+        $nonAcademics = Non_academic::where('data_types_id', $dataTypeId)->get();
+        return response()->json(['academics' => $academics, 'nonAcademics' => $nonAcademics]);
+    }
+
+    public function getExpertise($dataTypeId)
+    {
+        $expertises = Expertise::where('data_types_id', $dataTypeId)->get();
+        return response()->json($expertises);
+    }
+
+    public function getSpeciality($dataTypeId)
+    {
+        $specialities = Speciality::where('data_types_id', $dataTypeId)->get();
+        return response()->json($specialities);
+    }
+
+    public function getSubjects($specialityId)
+    {
+        $subjects = Subject::where('speciality_id', $specialityId)->get();
+        return response()->json($subjects);
+    }
+
+
     public function dashboard()
     {
         $user_id = auth()->id();
@@ -66,8 +92,6 @@ class DashboardController extends Controller
 
     public function submit_application(Request $request)
     {
-
-        // dd($request->all());
             // Validate the request data
             $validatedData = $request->validate([
                 'applicant_name' => 'nullable|string|max:255',
@@ -90,7 +114,7 @@ class DashboardController extends Controller
                 'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // updated for file upload
                 'category' => 'required|string', // This field will hold either 'academic_{id}' or 'non_academic_{id}'
                 'data_types_id' => 'nullable|exists:data_types,id',
-                'speciality' => 'nullable|exists:speciality,id',
+                'speciality' => 'nullable|exists:specialities,id',
                 'expertise' => 'nullable|exists:expertise,id',
                 'subjects' => 'nullable|exists:subjects,id',
             ]);
@@ -135,6 +159,7 @@ class DashboardController extends Controller
                 'referredBy' => $validatedData['referred_by'] ?? null,
                 'profile_img' => $profile_img,
                 'cv' => $cv,
+                'data_types_id' => $validatedData['data_types_id'] ?? null,
                 'academic_id' => $academic_id,
                 'non_academic_id' => $non_academic_id,
                 'speciality_id' => $validatedData['speciality'] ?? null,
@@ -151,21 +176,82 @@ class DashboardController extends Controller
 
     public function thank_you()
     {
-        // $total_users = DB::table('users')->where('role','student')->count();
-
         return view('main.thank_you', get_defined_vars());
     }
 
-    public function filter_page()
+    public function filter_page(Request $request)
     {
-        $applications = Application::all();
-        $academics = Academic::all();
-        $nonAcademics = Non_academic::all();
-        $expertises = Expertise::all();
-        $specialities = Speciality::all();
-        $subjects = Subject::all();
+        
+        $types = Datatypes::all();
+
+        $type_id = 1;
+        if(isset($request->typeid)){
+            $type_id = $request->typeid;
+        }
+        
+        $applications = Application::where('data_types_id', $type_id)->get();
+        $academics = Academic::where('data_types_id', $type_id)->get();
+        $nonAcademics = Non_academic::where('data_types_id', $type_id)->get();
+        $expertises = Expertise::where('data_types_id', $type_id)->get();
+        $specialities = Speciality::where('data_types_id', $type_id)->get();
+        $subject_ids = $specialities->pluck('id')->toArray();
+        $subjects = Subject::whereIn('speciality_id', $subject_ids)->get();
+        
         return view('main.filter_data', get_defined_vars());
     }
+
+    public function destroyapp($appid)
+    {
+        $Application = Application::find($appid);
+        $Application->delete();
+        return redirect()->back()->with('success', 'Application Deleted successfully.');
+    }
+
+    
+    public function deleteBulkRecords(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        // Validate if IDs are provided
+        if (empty($ids)) {
+            return response()->json(['status' => 'No records selected for deletion.'], 400);
+        }
+
+        // Delete records
+        $deletedCount = Application::whereIn('id', $ids)->delete();
+
+        if ($deletedCount > 0) {
+            return response()->json(['status' => 'Application deleted successfully!']);
+        } else {
+            return response()->json(['status' => 'No Application were deleted.'], 400);
+        }
+    }
+
+// web.php
+
+// ApplicationController.php
+public function getFilters($filterType, $typeId)
+{
+    switch ($filterType) {
+        case 'specialities':
+            $filters = Speciality::where('data_types_id', $typeId)->get();
+            break;
+        case 'nonAcademics':
+            $filters = Non_academic::where('data_types_id', $typeId)->get();
+            break;
+        case 'academics':
+            $filters = Academic::where('data_types_id', $typeId)->get();
+            break;
+        case 'subjects':
+            $filters = Subject::where('speciality_id', $typeId)->get();
+            break;
+        default:
+            $filters = [];
+    }
+
+    return response()->json($filters);
+}
+
 
     public function application_details($app_id)
     {

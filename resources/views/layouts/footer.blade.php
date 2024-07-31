@@ -34,7 +34,6 @@
     <script type="text/javascript" src="{{url('public/assets/daterange/moment.min.js')}}"></script>
     <script type="text/javascript" src="{{url('public/assets/daterange/daterangepicker.min.js')}}"></script>
 
-    
 
 <script>
 $(document).ready(function() {
@@ -89,6 +88,11 @@ $(document).ready(function() {
 
 
 </script>
+
+
+
+
+
 
 </body>
 
