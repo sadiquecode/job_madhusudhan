@@ -1,16 +1,13 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Filter form</title>
+@include('layouts.head')
+<div class="main-wrapper">
+@include('layouts.header')
+@include('layouts.sidebar')
+<div class="page-wrapper">
+<div class="content container-fluid">
     <!-- Custom CSS  -->
     <link href="{{ url('public/theme_assets/css/style.css')}}" rel="stylesheet">
     <!-- Bootstrap CSS  -->
     <link href="{{ url('public/theme_assets/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ url('public/assets/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
 
     <style>
 .filter-btn {
@@ -48,10 +45,19 @@
     }
 }
 
+.profile-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        display: block;
+    }
+    a {
+    text-decoration: none;
+}
+
     </style>
-</head>
- 
-<body>
+
+
 <div class="container my-5">
         <div class="jobform">
             
@@ -153,12 +159,16 @@
     <div class="container">
 
 
-        <div class="row">
-            <div class="col-sm-12 text-center m-b-20">
-                <button type="button" class="btn-sm btn btn-secondary btn-rounded m-r-5" id="toggleSelectAll"><i class="fa fa-check"></i> Select All</button>
-                <button type="button" class="btn-sm btn btn-danger btn-rounded float-right m-r-5" onclick="startBulkDelete()"><i class="fa fa-trash"></i> Bulk Delete</button>
-            </div>
-        </div>
+    <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+        <button type="button" class="btn-sm btn btn-secondary btn-rounded m-r-5" id="toggleSelectAll">
+            <i class="fa fa-check"></i> Select All
+        </button>
+        <button type="button" class="btn-sm btn btn-danger btn-rounded m-r-5 delete_btn" onclick="startBulkDelete()">
+            <i class="fa fa-trash"></i> Bulk Delete
+        </button>
+    </div>
+</div>
 
 
         <div class="table-responsive">
@@ -168,6 +178,7 @@
                         <th class="col">Select</th>
                         <th scope="col">SL.</th>
                         <th scope="col">NAME</th>
+                        <th scope="col-3">Profile</th>
                         <th scope="col">YEAR AND EXP</th>
                         <th scope="col">SUBJECTS</th>
                         <th scope="col">PLACE</th>
@@ -183,6 +194,16 @@
                             </td>    
                             <th scope="row">{{ $key + 1 }}.</th>
                             <td><a href="{{url('application-details/'.$application->id)}}" target="_blank">{{ $application->applicant_name }}</a></td>
+                            
+
+                <th scope="row">
+                    @if (empty($application->profile_img))
+                    <img class="rounded-5" src="{{ url('public/assets/img/user.jpg') }}" alt="Profile Picture">
+                    @else
+                    <img class="rounded-5 profile-img" src="{{ url('storage/app/' . $application->profile_img) }}" alt="Profile Picture">
+                    @endif
+                </th>
+
                             <td>{{ $application->experience_years }}</td>
                             <td>{{ $application->qualification }}</td>
                             <td>{{ $application->address }}</td>
@@ -199,29 +220,17 @@
     </div>
 
     
-    <div class="py-5">
-                <a href="{{url('dashboard')}}" class="btn d-inline-flex align-items-center fw-bold btn-primary gap-2"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff"
-                        class="bi bi-sign-turn-left-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM7 8.466a.25.25 0 0 1-.41.192L4.23 6.692a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V6h1.5A2.5 2.5 0 0 1 11 8.5V11h-1V8.5A1.5 1.5 0 0 0 8.5 7H7z" />
-                    </svg>Back</a>
-            </div>
+
 
 </div>
 
         </div>
     </div>
 
+    </div>
+</div>
 <!-- Bootstrap JS -->
 <script type="text/javascript" src="{{url('public/assets/js/jquery-3.5.1.min.js')}}"></script>
-
-<script src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.4/js/dataTables.bootstrap4.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.bootstrap4.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
 
 
 <script>
@@ -296,7 +305,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     // Attach the function to the bulk delete button
-    document.querySelector('.btn.btn-danger').addEventListener('click', startBulkDelete);
+    document.querySelector('.delete_btn').addEventListener('click', startBulkDelete);
 });
 
 // Function to handle bulk deletion
@@ -335,6 +344,4 @@ function startBulkDelete() {
 }
 </script>
 
-</body>
-
-</html>
+@include('layouts.footer')

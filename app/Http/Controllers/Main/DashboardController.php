@@ -110,8 +110,8 @@ class DashboardController extends Controller
                 'number' => 'nullable|string|max:255',
                 'democlass' => 'nullable|string|max:255',
                 'referred_by' => 'nullable|in:newspaper,socialmedia,friends,others',
-                'profile_img' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048', // updated for file upload
-                'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // updated for file upload
+                'profile_img' => 'nullable|file|mimes:jpeg,png,jpg', // updated for file upload
+                'cv' => 'nullable|file|mimes:pdf,doc,docx,jpeg,png,jpg', // updated for file upload
                 'category' => 'required|string', // This field will hold either 'academic_{id}' or 'non_academic_{id}'
                 'data_types_id' => 'nullable|exists:data_types,id',
                 'speciality' => 'nullable|exists:specialities,id',
@@ -190,6 +190,8 @@ class DashboardController extends Controller
         }
         
         $applications = Application::where('data_types_id', $type_id)->get();
+
+        // dd($applications);
         $academics = Academic::where('data_types_id', $type_id)->get();
         $nonAcademics = Non_academic::where('data_types_id', $type_id)->get();
         $expertises = Expertise::where('data_types_id', $type_id)->get();
@@ -197,7 +199,7 @@ class DashboardController extends Controller
         $subject_ids = $specialities->pluck('id')->toArray();
         $subjects = Subject::whereIn('speciality_id', $subject_ids)->get();
         
-        return view('main.filter_data', get_defined_vars());
+        return view('main.filter_data_2', get_defined_vars());
     }
 
     public function destroyapp($appid)

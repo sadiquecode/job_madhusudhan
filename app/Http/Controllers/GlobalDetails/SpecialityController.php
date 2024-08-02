@@ -4,6 +4,7 @@ namespace App\Http\Controllers\GlobalDetails;
 
 use App\Models\GlobalDetails\Speciality;
 use App\Models\GlobalDetails\Datatypes;
+use App\Models\GlobalDetails\Subject;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -59,6 +60,10 @@ class SpecialityController extends Controller
 // destroy
     public function destroy(Speciality $speciality)
     {
+        // Delete related subjects first
+        Subject::where('speciality_id', $speciality->id)->delete();
+        
+        // Delete the speciality
         $speciality->delete();
         return redirect()->back()->with('success', 'Speciality Deleted successfully.');
     }

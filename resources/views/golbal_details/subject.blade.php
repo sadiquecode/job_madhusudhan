@@ -230,12 +230,18 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if(isset($subject))
 <script>
     $(document).ready(function() {
         $('#data_types_id_{{ $subject->id }}').on('change', function() {
             loadSpecialities({{ $subject->id }});
         });
     });
+</script>
+@endif
+
+<script>
 
     function loadSpecialities(subjectId) {
         const dataTypeId = $(`#data_types_id_${subjectId}`).val();

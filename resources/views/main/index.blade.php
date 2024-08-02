@@ -14,7 +14,7 @@
 <body>
     <div class="container my-5">
         <div class="jobform">
-            <h1 class="text-center text-uppercase py-5 fw-bold">Apply for jobs </h1>
+            <h1 class="text-center text-uppercase py-5 fw-bold">Applying For Jobs </h1>
             
             
 @if ($errors->any())
@@ -32,6 +32,54 @@
     <p>{{ $message }}</p>
 </div>
 @endif
+
+<style>
+.custom-radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.custom-radio .form-check-input {
+    display: none;
+}
+
+.custom-radio .form-check-label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.custom-radio .form-check-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff; /* Customize border color */
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.custom-radio .form-check-input:checked + .form-check-label::before {
+    background-color: #007bff; /* Customize background color */
+}
+
+.custom-radio .form-check-input:checked + .form-check-label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+</style>
 
             
             <form action="{{ route('submit_application') }}" method="POST"  enctype="multipart/form-data" class="needs-validation" novalidate onsubmit="return validateForm()">
@@ -105,51 +153,56 @@
 
                     
 
-<div class="row">
+    <div class="row">
         <div class="col-12 px-0">
-            <h6 class="fw-bold">Applied Type</h6>
+            <h6 class="fw-bold">Applying For School or College</h6>
         </div>
     </div>
 
-    <div class="row">
-        @foreach ($dataTypes as $type)
-            <div class="col-lg-4 col-6 form-check">
-                <input class="form-check-input shadow-none" type="radio" name="data_types_id" value="{{ $type->id }}" id="type{{ $type->id }}" onclick="loadPostAppliedFor({{ $type->id }})">
-                <label class="form-check-label" for="type{{ $type->id }}">
-                    {{ $type->title }}
-                </label>
-            </div>
-        @endforeach
-    </div>
-    <br>
 
     <div class="row">
-        <div class="col-12 px-0">
-            <h6 class="fw-bold">Post Applied For</h6>
+    @foreach ($dataTypes as $type)
+        <div class="col-lg-4 col-6 form-check custom-radio">
+            <input class="form-check-input shadow-none" type="radio" name="data_types_id" value="{{ $type->id }}" id="type{{ $type->id }}" onclick="loadPostAppliedFor({{ $type->id }})">
+            <label class="form-check-label" for="type{{ $type->id }}">
+                {{ $type->title }}
+            </label>
         </div>
+    @endforeach
+</div>
+<br>
+
+<div class="row" id="postAppliedForSection" style="display: none;">
+    <div class="col-12 px-0">
+        <h6 class="fw-bold">Post Applied For</h6>
     </div>
     <div id="postAppliedFor"></div>
+</div>
 
-    <div class="row">
-        <div class="col-12 px-0 pt-2 mt-3">
-            <h6 class="fw-bold">Expertise in</h6>
-        </div>
+<div class="row" id="expertiseSection" style="display: none;">
+    <div class="col-12 px-0 pt-2 mt-3">
+        <h6 class="fw-bold">Expertise in</h6>
     </div>
     <div id="expertise"></div>
+</div>
 
-    <div class="row">
-        <div class="col-12 px-0 pt-2 mt-3">
-            <h6 class="fw-bold">Specialized in</h6>
-        </div>
+<div class="row" id="specialitySection" style="display: none;">
+    <div class="col-12 px-0 pt-2 mt-3">
+        <h6 class="fw-bold">Specialized in</h6>
     </div>
     <div id="speciality"></div>
+</div>
 
-    <div class="row">
-        <div class="col-12 px-0 pt-2 mt-3">
-            <h6 class="fw-bold">Subjects Handling</h6>
-        </div>
+<div class="row" id="subjectsSection" style="display: none;">
+    <div class="col-12 px-0 pt-2 mt-3">
+        <h6 class="fw-bold">Subjects Handling</h6>
     </div>
     <div id="subjects"></div>
+</div>
+
+
+
+
                     </div>
             
                 <div class="container pt-3">
@@ -185,7 +238,7 @@
                         <div class="col-md-12 col-12 px-0">
                             <div class="mb-3 me-md-1">
                                 <textarea name="address" type="text" value="" class="form-control shadow-none" id="languagesinput"
-                                    placeholder="Address" rows="5" required>India</textarea>
+                                    placeholder="Address" rows="5" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -198,8 +251,10 @@
                         </div>
                         <div class="col-md-6 col-12 px-0">
                             <div class="mb-3 ms-md-1">
-                                <input name="number" type="number" value="91" class="form-control shadow-none" id="languagesinput"
-                                    placeholder="+91" required>
+                            <input name="number" type="text" value="91" class="form-control shadow-none" id="languagesinput"
+       placeholder="+91" required maxlength="12" oninput="validateInput(this)" onkeydown="preventModification(event)">
+
+
                             </div>
                         </div>
                     </div>
@@ -233,25 +288,25 @@
         </div>
     </div>
     <div class="row px-lg-3">
-        <div class="col-lg-2 col-6 form-check">
+        <div class="col-lg-2 col-6 form-check custom-radio">
             <input class="form-check-input shadow-none" checked type="radio" name="referred_by" value="newspaper" id="newspaperRadio" required>
             <label class="form-check-label" for="newspaperRadio">
                 Newspaper
             </label>
         </div>
-        <div class="col-lg-2 col-6 form-check">
+        <div class="col-lg-2 col-6 form-check custom-radio">
             <input class="form-check-input shadow-none" type="radio" name="referred_by" value="socialmedia" id="socialmediaRadio" required>
             <label class="form-check-label" for="socialmediaRadio">
                 Social Media
             </label>
         </div>
-        <div class="col-lg-2 col-6 form-check">
+        <div class="col-lg-2 col-6 form-check custom-radio">
             <input class="form-check-input shadow-none" type="radio" name="referred_by" value="friends" id="friendsRadio" required>
             <label class="form-check-label" for="friendsRadio">
                 Friends
             </label>
         </div>
-        <div class="col-lg-2 col-6 form-check">
+        <div class="col-lg-2 col-6 form-check custom-radio">
             <input class="form-check-input shadow-none" type="radio" name="referred_by" value="others" id="othersRadio" required>
             <label class="form-check-label" for="othersRadio">
                 Others
@@ -273,73 +328,113 @@
     <script src="{{ url('public/theme_assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
 
     <script>
-    var base_url = "{{ url('/') }}";
 
-    function loadPostAppliedFor(dataTypeId) {
-        clearDependentFields();
+function validateInput(element) {
+    const prefix = "91";
+    const maxLength = 12;
+    
+    // Ensure the input always starts with "91"
+    if (element.value.slice(0, 2) !== prefix) {
+        element.value = prefix;
+    }
+    
+    // Limit the total length to 12 characters
+    if (element.value.length > maxLength) {
+        element.value = element.value.slice(0, maxLength);
+    }
+}
 
-        fetch(base_url+`/getPostAppliedFor/${dataTypeId}`)
-            .then(response => response.json())
-            .then(data => {
-                let postAppliedForHtml = '';
+function preventModification(event) {
+    const prefix = "91";
+    const inputField = event.target;
 
-                postAppliedForHtml += '<span style="color:red">Academic</span><div class="row">';
-                data.academics.forEach(item => {
-                    postAppliedForHtml += `
-                        <div class="col-lg-4 col-6 form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="category" value="academic_${item.id}" id="academic_${item.id}" onclick="loadExpertise(${dataTypeId})">
-                            <label class="form-check-label" for="academic_${item.id}">${item.title}</label>
-                        </div>`;
-                });
-                postAppliedForHtml += '</div>';
-
-                postAppliedForHtml += '<span style="color:red">Non Academic</span><div class="row">';
-                data.nonAcademics.forEach(item => {
-                    postAppliedForHtml += `
-                        <div class="col-lg-4 col-6 form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="category" value="non_academic_${item.id}" id="non_academic_${item.id}" onclick="loadExpertise(${dataTypeId})">
-                            <label class="form-check-label" for="non_academic_${item.id}">${item.title}</label>
-                        </div>`;
-                });
-                postAppliedForHtml += '</div>';
-
-                document.getElementById('postAppliedFor').innerHTML = postAppliedForHtml;
-            });
+    // Prevent deleting the prefix
+    if (inputField.selectionStart < prefix.length && (event.key === "Backspace" || event.key === "Delete")) {
+        event.preventDefault();
     }
 
-
-    function loadExpertise(dataTypeId) {
-        clearFields(['expertise', 'speciality', 'subjects']);
-
-        fetch(base_url+`/getExpertise/${dataTypeId}`)
-            .then(response => response.json())
-            .then(data => {
-                let expertiseHtml = '<div class="row px-lg-3">';
-
-                data.forEach(item => {
-                    expertiseHtml += `
-                        <div class="col-lg-3 col-6 form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="expertise" value="${item.id}" id="expertise_${item.id}" onclick="loadSpeciality(${dataTypeId})">
-                            <label class="form-check-label" for="expertise_${item.id}">${item.title}</label>
-                        </div>`;
-                });
-
-                expertiseHtml += '</div>';
-                document.getElementById('expertise').innerHTML = expertiseHtml;
-            });
+    // Prevent modifying the prefix
+    if (inputField.selectionStart < prefix.length && event.key.length === 1 && event.key.match(/[0-9]/)) {
+        event.preventDefault();
     }
 
-    function loadSpeciality(dataTypeId) {
+    // Ensure the prefix remains at the start
+    if (inputField.value.slice(0, 2) !== prefix) {
+        inputField.value = prefix + inputField.value.slice(2);
+    }
+}
+
+
+var base_url = "{{ url('/') }}";
+
+function loadPostAppliedFor(dataTypeId) {
+    clearDependentFields();
+
+    fetch(base_url + `/getPostAppliedFor/${dataTypeId}`)
+        .then(response => response.json())
+        .then(data => {
+            let postAppliedForHtml = '';
+
+            postAppliedForHtml += '<span style="color:red">Academic</span><div class="row">';
+            data.academics.forEach(item => {
+                postAppliedForHtml += `
+                    <div class="col-lg-4 col-6 form-check custom-radio">
+                        <input class="form-check-input shadow-none" type="radio" name="category" value="academic_${item.id}" id="academic_${item.id}" onclick="loadExpertise(${dataTypeId})">
+                        <label class="form-check-label" for="academic_${item.id}">${item.title}</label>
+                    </div>`;
+            });
+            postAppliedForHtml += '</div>';
+
+            postAppliedForHtml += '<span style="color:red">Non Academic</span><div class="row">';
+            data.nonAcademics.forEach(item => {
+                postAppliedForHtml += `
+                    <div class="col-lg-4 col-6 form-check custom-radio">
+                        <input class="form-check-input shadow-none" type="radio" name="category" value="non_academic_${item.id}" id="non_academic_${item.id}" onclick="loadExpertise(${dataTypeId})">
+                        <label class="form-check-label" for="non_academic_${item.id}">${item.title}</label>
+                    </div>`;
+            });
+            postAppliedForHtml += '</div>';
+
+            document.getElementById('postAppliedFor').innerHTML = postAppliedForHtml;
+            document.getElementById('postAppliedForSection').style.display = 'block';
+        });
+}
+
+function loadExpertise(dataTypeId) {
+    clearFields(['expertise', 'speciality', 'subjects']);
+
+    fetch(base_url + `/getExpertise/${dataTypeId}`)
+        .then(response => response.json())
+        .then(data => {
+            let expertiseHtml = '<div class="row px-lg-3">';
+
+            data.forEach(item => {
+                expertiseHtml += `
+                    <div class="col-lg-3 col-6 form-check custom-radio">
+                        <input class="form-check-input shadow-none" type="radio" name="expertise" value="${item.id}" id="expertise_${item.id}" onclick="loadSpeciality(${dataTypeId})">
+                        <label class="form-check-label" for="expertise_${item.id}">${item.title}</label>
+                    </div>`;
+            });
+
+            expertiseHtml += '</div>';
+            document.getElementById('expertise').innerHTML = expertiseHtml;
+            document.getElementById('expertiseSection').style.display = 'block';
+        });
+}
+
+function loadSpeciality(dataTypeId) {
+    if (document.querySelector('input[name="category"]:checked').value.startsWith('non_academic')) {
+        document.getElementById('specialitySection').style.display = 'none';
         clearFields(['speciality', 'subjects']);
-
-        fetch(base_url+`/getSpeciality/${dataTypeId}`)
+    } else {
+        fetch(base_url + `/getSpeciality/${dataTypeId}`)
             .then(response => response.json())
             .then(data => {
                 let specialityHtml = '<div class="row px-lg-3">';
 
                 data.forEach(item => {
                     specialityHtml += `
-                        <div class="col-lg-2 col-6 form-check">
+                        <div class="col-lg-2 col-6 form-check custom-radio">
                             <input class="form-check-input shadow-none" type="radio" name="speciality" value="${item.id}" id="speciality_${item.id}" onclick="loadSubjects(${item.id})">
                             <label class="form-check-label" for="speciality_${item.id}">${item.title}</label>
                         </div>`;
@@ -347,44 +442,49 @@
 
                 specialityHtml += '</div>';
                 document.getElementById('speciality').innerHTML = specialityHtml;
+                document.getElementById('specialitySection').style.display = 'block';
             });
     }
+}
 
-    function loadSubjects(specialityId) {
-        fetch(base_url+`/getSubjects/${specialityId}`)
-            .then(response => response.json())
-            .then(data => {
-                let subjectsHtml = '<div class="row px-lg-3">';
+function loadSubjects(specialityId) {
+    fetch(base_url + `/getSubjects/${specialityId}`)
+        .then(response => response.json())
+        .then(data => {
+            let subjectsHtml = '<div class="row px-lg-3">';
 
-                data.forEach(item => {
-                    subjectsHtml += `
-                        <div class="col-lg-2 col-12 form-check">
-                            <input class="form-check-input shadow-none" type="radio" name="subjects" value="${item.id}" id="subject_${item.id}">
-                            <label class="form-check-label" for="subject_${item.id}">${item.title}</label>
-                        </div>`;
-                });
-
-                subjectsHtml += '</div>';
-                document.getElementById('subjects').innerHTML = subjectsHtml;
+            data.forEach(item => {
+                subjectsHtml += `
+                    <div class="col-lg-2 col-12 form-check custom-radio">
+                        <input class="form-check-input shadow-none" type="radio" name="subjects" value="${item.id}" id="subject_${item.id}">
+                        <label class="form-check-label" for="subject_${item.id}">${item.title}</label>
+                    </div>`;
             });
-    }
 
-
-
-    function clearDependentFields() {
-        document.getElementById('postAppliedFor').innerHTML = '';
-        document.getElementById('expertise').innerHTML = '';
-        document.getElementById('speciality').innerHTML = '';
-        document.getElementById('subjects').innerHTML = '';
-    }
-
-    function clearFields(fields) {
-        fields.forEach(field => {
-            document.getElementById(field).innerHTML = '';
+            subjectsHtml += '</div>';
+            document.getElementById('subjects').innerHTML = subjectsHtml;
+            document.getElementById('subjectsSection').style.display = 'block';
         });
-    }
+}
 
+function clearDependentFields() {
+    document.getElementById('postAppliedFor').innerHTML = '';
+    document.getElementById('expertise').innerHTML = '';
+    document.getElementById('speciality').innerHTML = '';
+    document.getElementById('subjects').innerHTML = '';
 
+    document.getElementById('postAppliedForSection').style.display = 'none';
+    document.getElementById('expertiseSection').style.display = 'none';
+    document.getElementById('specialitySection').style.display = 'none';
+    document.getElementById('subjectsSection').style.display = 'none';
+}
+
+function clearFields(fields) {
+    fields.forEach(field => {
+        document.getElementById(field).innerHTML = '';
+        document.getElementById(field + 'Section').style.display = 'none';
+    });
+}
 </script>
 
 </body>

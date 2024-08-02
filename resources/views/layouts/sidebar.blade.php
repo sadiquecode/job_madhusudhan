@@ -8,6 +8,10 @@
                     <a href="{{url('/dashboard')}}"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
+                <li class="{{ request()->is('filter-page') ? 'active' : '' }}">
+                    <a href="{{url('/filter-page')}}"><i class="fas fa-search"></i> Filter Page</a>
+                </li>
+
 
                 <!-- <li class="menu-title">USERS</li>
                 <li class="{{ request()->is('dashboard/customers') ? 'active' : '' }}">
