@@ -154,7 +154,7 @@
                     @endif
                 </td>
                 <td><?php if(isset($application->speciality->title)){ ?> {{$application->speciality->title}} <?php }else{ ?> No Found! <?php } ?></td>
-                <td>{{ $application->expertise->title }}</td>
+                <td><?php if(isset($application->expertise->title)){ ?> {{$application->expertise->title}} <?php }else{ ?> No Found! <?php } ?></td>
                 <td>{{ $application->number }}</td>
                 <td>{{ $application->experience_years }}</td>
                 <td>{{ $application->working_exp }}</td>

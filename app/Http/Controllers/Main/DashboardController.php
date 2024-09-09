@@ -96,7 +96,7 @@ class DashboardController extends Controller
             $validatedData = $request->validate([
                 'applicant_name' => 'nullable|string|max:255',
                 'father_name' => 'nullable|string|max:255',
-                'date' => 'nullable|date',
+                'date' => 'nullable|string',
                 'caste' => 'nullable|string|max:255',
                 'martial_status' => 'nullable|string|max:255',
                 'language' => 'nullable|string|max:255',
@@ -118,7 +118,12 @@ class DashboardController extends Controller
                 'expertise' => 'nullable|exists:expertise,id',
                 'subjects' => 'nullable|exists:subjects,id',
             ]);
-    
+                    
+                        // Convert the date format
+            if (!empty($validatedData['date'])) {
+                $validatedData['date'] = Carbon::createFromFormat('m/d/Y', $validatedData['date'])->format('Y-m-d');
+            }
+
             // Separate category into academic and non_academic
             $academic_id = null;
             $non_academic_id = null;

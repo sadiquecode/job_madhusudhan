@@ -9,6 +9,23 @@
     <link href="{{ url('public/theme_assets/css/style.css')}}" rel="stylesheet">
     <!-- Bootstrap CSS  -->
     <link href="{{ url('public/theme_assets/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
+
+
+    <!-- Include Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Include Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- <style>
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+    </style> -->
 </head>
 
 <body>
@@ -82,7 +99,7 @@
 </style>
 
             
-            <form action="{{ route('submit_application') }}" method="POST"  enctype="multipart/form-data" class="needs-validation" novalidate onsubmit="return validateForm()">
+            <form action="{{ route('submit_application') }}" method="POST"  enctype="multipart/form-data" class="needs-validation" novalidate>
             @csrf
                 <div class="mb-3">
                     <input name="applicant_name" type="text" class="form-control shadow-none" value="" required placeholder="Applicant Name">
@@ -112,11 +129,12 @@
                                     placeholder="Father's Name">
                             </div>
                         </div>
-                        <div class="col-md-6 col-12 px-0">
-                            <div class="mb-3 ms-md-1">
-                                <input name="date" type="date" class="form-control shadow-none" value="" placeholder="Date of Birth" required>
-                            </div>
-                        </div>
+
+<div class="col-md-6 col-12 px-0">
+    <div class="mb-3 ms-md-1">
+        <input id="datepicker_" name="date" type="text" class="form-control shadow-none" placeholder="Date of Birth" required>
+    </div>
+</div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-12 px-0">
@@ -317,8 +335,13 @@
 
 
                 <div class="submitbtn py-5 text-center">
-                    <button type="submit" class="btn btn-danger fw-bold px-3 rounded-5 p-3 w-25">Submit</button>
+                    <button type="submit" id="submitBtn"  class="btn btn-danger fw-bold px-3 rounded-5 p-3 w-25">Submit</button>
                 </div>
+
+        <div id="loader" class="text-center" style="display: none;">
+            <img src="http://localhost/job_madhusudhan/public/theme_assets/image/loader.gif" alt="Loading...">
+        </div>
+
             </form>
         </div>
     </div>
@@ -326,6 +349,51 @@
     <!-- Bootstrap JS -->
     <script src="{{ url('public/theme_assets/js/main.js')}}"></script>
     <script src="{{ url('public/theme_assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#datepicker_", {
+            dateFormat: "d/m/Y",
+            allowInput: true,
+            disableMobile: "true" // Ensure the custom picker is used on mobile devices
+        });
+    });
+
+</script>
+
+    <script>
+        // Form validation and loader display logic
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        } else {
+                            showLoader();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        function showLoader() {
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+        }
+
+        function updateLabel(inputId, labelId) {
+            var input = document.getElementById(inputId);
+            var label = document.getElementById(labelId);
+            label.textContent = input.files[0].name;
+        }
+    </script>
 
     <script>
 
